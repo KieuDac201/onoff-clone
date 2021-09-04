@@ -1,11 +1,12 @@
 import "./App.css";
 import Header from "./components/Header";
+import Home from "./pages/Home";
 
-console.log(process.env.REACT_APP_FIREBASE_API_KEY);
 function App() {
   return (
     <>
       <Header />
+      <Home />
     </>
   );
 }
