@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchProduct());
   }, []);
-  console.log(products);
+
   return (
     <>
       <Header />

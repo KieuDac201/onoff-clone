@@ -4,9 +4,9 @@ import discountImg from "../../assets/images/discount-10.png";
 import formatPrice from "../../utils/formatPrice";
 
 const ProductItem = ({ images, name, price }) => {
-  const [img, setImg] = useState(images[1]);
+  const [img, setImg] = useState(images[1] || images[3] || images[0]);
   const handleHover = () => {
-    const selectImg = images[2] || images[1] || images[0] || images[3];
+    const selectImg = images[2] || images[0] || images[3] || images[1];
     setImg(selectImg);
   };
 

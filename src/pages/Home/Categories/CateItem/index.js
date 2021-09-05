@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Button from "../../../../components/Button";
 
 const CateItem = ({ img, name }) => {
   return (
@@ -7,7 +8,7 @@ const CateItem = ({ img, name }) => {
       <CateImg src={img} />
       <CateInfo>
         <CateName>Đồ {name}</CateName>
-        <CateBtn>Xem ngay</CateBtn>
+        <Button text="Xem ngay" />
       </CateInfo>
     </Container>
   );
@@ -50,22 +51,4 @@ const CateName = styled.h4`
   z-index: 2;
   font-weight: 500;
   font-size: 18px;
-`;
-const CateBtn = styled.div`
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  height: 32px;
-  width: 110px;
-  text-align: center;
-  line-height: 32px;
-  border: 1px solid #231f20;
-  z-index: 2;
-  color: #231f20;
-  cursor: pointer;
-
-  :hover {
-    background: #000;
-    color: #fff;
-    transition: 0.2s ease-in-out;
-  }
 `;
