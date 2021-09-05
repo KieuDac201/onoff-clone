@@ -16,7 +16,7 @@ export default Banner;
 
 const Wrapper = styled.div`
   width: 100%;
-  margin-top: 65px;
+  margin-top: 45px;
   min-height: min(60vw, 90vh);
   background: center / cover no-repeat url(${bannerImg});
   @media (max-width: 687px) {
