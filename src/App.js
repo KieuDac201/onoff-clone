@@ -1,25 +1,39 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { Route, Switch } from "react-router";
 import "./App.css";
-import Header from "./components/Header";
-import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 import { fetchProduct } from "./redux/slice/productSlice";
+import ROUTES_MAIN from "./Router";
+
+function MainLayout() {
+  return (
+    <>
+      <Switch>
+        {ROUTES_MAIN.map((route, i) => {
+          return (
+            <Route
+              key={route.key}
+              exact={route.exact}
+              component={route.component}
+              path={route.path}
+            />
+          );
+        })}
+        <Route path="*" exact={true} component={() => <NotFound />} />
+      </Switch>
+    </>
+  );
+}
 
 function App() {
   const dispatch = useDispatch();
-
-  const products = useSelector((state) => state.allProduct);
 
   useEffect(() => {
     dispatch(fetchProduct());
   }, []);
 
-  return (
-    <>
-      <Header />
-      <Home />
-    </>
-  );
+  return <MainLayout />;
 }
 
 export default App;
