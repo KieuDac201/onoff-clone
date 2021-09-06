@@ -35,6 +35,7 @@ export const Menu = styled.div`
   align-items: center;
   flex: 1;
   justify-content: center;
+
   @media (max-width: 1010px) {
     position: fixed;
     z-index: 999;
@@ -48,6 +49,9 @@ export const Menu = styled.div`
     justify-content: flex-start;
     transition: 0.2s ease-in-out;
     left: ${(props) => (props.isShowMenu ? "0" : "-101%")};
+    a {
+      width: 100%;
+    }
   }
 `;
 export const MenuItem = styled.div`

@@ -8,8 +8,8 @@ import {
   SideBar1,
   SideBarTop,
   WrapperItem,
+  Title,
 } from "./styled";
-import { Title } from "../../../components/Footer/styled";
 
 const SideBar = ({ setProductsFiltered, products, gender }) => {
   const [isShow, setIsShow] = useState(false);

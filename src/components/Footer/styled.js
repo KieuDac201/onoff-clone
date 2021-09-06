@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   background: #333f48;
-  padding: 35px 0;
+  padding-top: 35px;
+  padding-bottom: 50px;
 `;
 export const Row = styled.div`
   display: grid;

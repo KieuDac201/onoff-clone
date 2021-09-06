@@ -32,6 +32,9 @@ const Header = () => {
   const toggleShowMenu = () => {
     setIsShowMenu(!isShowMenu);
   };
+  const hideMenu = () => {
+    setIsShowMenu(false);
+  };
   const toggleShowSearch = () => {
     setIsShowSearch(!isShowSearch);
   };
@@ -54,15 +57,15 @@ const Header = () => {
             <Logo src={logoImg} alt="Onoff Logo" />
           </Link>
           <Menu isShowMenu={isShowMenu}>
-            <MenuItem>
-              <Link to="/do-nam">Nam</Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/do-nu">Nữ </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link to="/do-tre-em">Trẻ em</Link>
-            </MenuItem>
+            <Link to="/do-nam" onClick={hideMenu}>
+              <MenuItem>Nam</MenuItem>
+            </Link>
+            <Link to="/do-nu" onClick={hideMenu}>
+              <MenuItem>Nữ</MenuItem>
+            </Link>
+            <Link to="/do-tre-em" onClick={hideMenu}>
+              <MenuItem>Trẻ em</MenuItem>
+            </Link>
           </Menu>
           <SearchWrapper isShowSearch={isShowSearch}>
             <SearchInput type="text" placeholder="Tìm kiếm" />

@@ -64,6 +64,9 @@ export const ProductTop = styled.div`
     align-items: flex-start;
     gap: 10px;
   }
+  @media (max-width: 420px) {
+    grid-column: 1/ 2;
+  }
 `;
 export const TitleTop = styled.p`
   font-size: clamp(20px, 3vw, 24px);
