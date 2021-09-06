@@ -12,6 +12,7 @@ export const BreadcrumItem = styled.p`
   border-right: 1px solid;
   text-transform: uppercase;
   font-weight: 500;
+  cursor: pointer;
   color: #999999;
   &:last-child {
     border-right: none;

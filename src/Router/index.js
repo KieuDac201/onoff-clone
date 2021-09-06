@@ -14,7 +14,19 @@ const ROUTES_MAIN = [
     component: () => <Register />,
   },
   {
-    path: "/product",
+    path: "/do-nam",
+    key: "product",
+    exact: false,
+    component: () => <Product />,
+  },
+  {
+    path: "/do-nu",
+    key: "product",
+    exact: false,
+    component: () => <Product />,
+  },
+  {
+    path: "/do-tre-em",
     key: "product",
     exact: false,
     component: () => <Product />,

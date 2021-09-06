@@ -50,14 +50,19 @@ const Header = () => {
               <BsChevronLeft />
             </ReturnIcon>
           )}
-
-          <Logo src={logoImg} alt="Onoff Logo" />
+          <Link to="/">
+            <Logo src={logoImg} alt="Onoff Logo" />
+          </Link>
           <Menu isShowMenu={isShowMenu}>
-            <Link to="">
-              <MenuItem>Nam</MenuItem>
-            </Link>
-            <MenuItem>Nữ</MenuItem>
-            <MenuItem>Trẻ em</MenuItem>
+            <MenuItem>
+              <Link to="/do-nam">Nam</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/do-nu">Nữ </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/do-tre-em">Trẻ em</Link>
+            </MenuItem>
           </Menu>
           <SearchWrapper isShowSearch={isShowSearch}>
             <SearchInput type="text" placeholder="Tìm kiếm" />

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../../components/Container";
 import ProductItem from "../../components/ProductItem";
 import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import SideBar from "./SideBar";
+import { Link } from "react-router-dom";
 import {
   Wrapper,
   Breadcrum,
@@ -18,22 +19,49 @@ import {
   TitleTop,
 } from "./styled";
 import Pagination from "./Pagination";
+import { useRouteMatch } from "react-router";
+import { useSelector } from "react-redux";
+import filterGender from "../../utils/filterGender";
 
 const Products = () => {
+  const { path } = useRouteMatch();
+  const [productsFiltered, setProductsFiltered] = useState([]);
+  const [productGender, setProductGender] = useState("nam");
+  const products = useSelector((state) => state.allProduct);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const gender = filterGender(path);
+    setProductGender(gender);
+
+    const filterProductGender = () => {
+      const tempArr = products.filter(
+        (product) => product.gender.toLowerCase() === gender
+      );
+      setProductsFiltered(tempArr);
+    };
+    filterProductGender();
+  }, [path, products]);
+
   return (
     <>
       <Header />
       <Wrapper>
         <Container>
           <Breadcrum>
-            <BreadcrumItem>Trang chu</BreadcrumItem>
-            <BreadcrumItem>San pham nam</BreadcrumItem>
+            <BreadcrumItem>
+              <Link to="/">Trang chủ</Link>
+            </BreadcrumItem>
+            <BreadcrumItem>Sản phẩm {productGender}</BreadcrumItem>
           </Breadcrum>
           <Main>
-            <SideBar></SideBar>
+            <SideBar
+              gender={productGender}
+              products={products}
+              setProductsFiltered={setProductsFiltered}
+            />
             <ProductList>
               <ProductTop>
-                <TitleTop>Thoi trang Nam</TitleTop>
+                <TitleTop>Thời trang {productGender}</TitleTop>
                 <SortTop>
                   <span>Sắp xếp theo</span>
                   <Select>
@@ -44,190 +72,14 @@ const Products = () => {
                   <FaLongArrowAltDown />
                 </SortTop>
               </ProductTop>
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
-              <ProductItem
-                name="Quần lót nữ kiểu bikini"
-                price={19585}
-                images={[
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU18007-01.jpg",
-                  "https://onoff.vn/media/catalog/product/cache/ecd9e5267dd6c36af89d5c309a4716fc/H16BU19243-01.jpg",
-                ]}
-              />
+              {productsFiltered.map((product) => (
+                <ProductItem
+                  key={product.id}
+                  name={product.name}
+                  price={product.price}
+                  images={product.images}
+                />
+              ))}
             </ProductList>
           </Main>
           <Pagination></Pagination>

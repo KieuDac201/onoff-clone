@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import discountImg from "../../assets/images/discount-10.png";
 import formatPrice from "../../utils/formatPrice";
+import loadImg from "../../assets/images/loading.png";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ProductItem = ({ images, name, price }) => {
   const [img, setImg] = useState(images[1] || images[3] || images[0]);
@@ -21,8 +23,10 @@ const ProductItem = ({ images, name, price }) => {
       <ProductImg
         src={img}
         alt={name}
+        effect="opacity"
         onMouseOver={handleHover}
         onMouseLeave={handleLeave}
+        placeholder={<img src={loadImg} alt="Loading" />}
       />
       <ProductName>{name}</ProductName>
       <OldPrice>{formatPrice(price)}</OldPrice>
@@ -46,13 +50,14 @@ const ProductItems = styled.div`
   :hover {
   }
 `;
-const ProductImg = styled.img`
+const ProductImg = styled(LazyLoadImage)`
   width: 100%;
+  margin-bottom: 12px;
 `;
 const ProductName = styled.p`
   font-size: 14px;
-  margin-top: 12px;
   margin-bottom: 12px;
+  margin-top: auto;
 `;
 const OldPrice = styled.p`
   font-size: 12px;
