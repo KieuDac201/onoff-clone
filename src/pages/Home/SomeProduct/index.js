@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Container from "../../../components/Container";
 import ProductItem from "../../../components/ProductItem";
-import ProductList from "../../../components/ProductList";
 import Title from "../../../components/Title";
 
 const SomeProduct = () => {
@@ -28,4 +27,22 @@ export default SomeProduct;
 const Wrapper = styled.div`
   background-color: #fff;
   padding: 50px 0;
+`;
+
+const ProductList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 850px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 420px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;

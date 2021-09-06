@@ -23,6 +23,7 @@ import {
   SearchWrapper,
   UserIcon,
 } from "./styled";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isShowMenu, setIsShowMenu] = useState(false);
@@ -52,7 +53,9 @@ const Header = () => {
 
           <Logo src={logoImg} alt="Onoff Logo" />
           <Menu isShowMenu={isShowMenu}>
-            <MenuItem>Nam</MenuItem>
+            <Link to="">
+              <MenuItem>Nam</MenuItem>
+            </Link>
             <MenuItem>Nữ</MenuItem>
             <MenuItem>Trẻ em</MenuItem>
           </Menu>
