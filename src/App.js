@@ -5,10 +5,10 @@ import NotFound from "./pages/NotFound/NotFound";
 import ROUTES_MAIN from "./Router/Router";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
-export const ProductsContext = createContext();
+export const AppContext = createContext();
 
 function MainLayout() {
   return (
@@ -33,6 +33,7 @@ function MainLayout() {
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [querySearch, setQuerySearch] = useState("");
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -47,9 +48,9 @@ function App() {
     fetchProduct();
   }, []);
   return (
-    <ProductsContext.Provider value={[products, setProducts]}>
+    <AppContext.Provider value={{ products, querySearch, setQuerySearch }}>
       <MainLayout />
-    </ProductsContext.Provider>
+    </AppContext.Provider>
   );
 }
 

@@ -15,19 +15,25 @@ const ROUTES_MAIN = [
   },
   {
     path: "/do-nam",
-    key: "product",
+    key: "productMen",
     exact: false,
     component: () => <Product />,
   },
   {
     path: "/do-nu",
-    key: "product",
+    key: "productWomen",
     exact: false,
     component: () => <Product />,
   },
   {
     path: "/do-tre-em",
-    key: "product",
+    key: "productChild",
+    exact: false,
+    component: () => <Product />,
+  },
+  {
+    path: "/search",
+    key: "productSearch",
     exact: false,
     component: () => <Product />,
   },

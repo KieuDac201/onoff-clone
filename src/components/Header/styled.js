@@ -85,37 +85,7 @@ export const MenuItem = styled.div`
     }
   }
 `;
-export const SearchWrapper = styled.div`
-  width: 235px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  padding: 0 8px;
-  position: relative;
-  border-bottom: 1px solid #c2c2c2;
-  color: #333;
-  margin-left: auto;
-  background: #fff;
-  @media (max-width: 1010px) {
-    position: fixed;
-    top: 69px;
-    left: 0;
-    width: 100%;
-    padding-right: 16px;
-    display: ${(props) => (props.isShowSearch ? "flex" : "none")};
-  }
-`;
-export const SearchInput = styled.input`
-  border: none;
-  outline: none;
-  height: 100%;
 
-  flex: 1;
-  padding-right: 8px;
-  &::placeholder {
-    font-style: italic;
-  }
-`;
 export const GroupIcon = styled.div`
   display: flex;
   align-items: center;

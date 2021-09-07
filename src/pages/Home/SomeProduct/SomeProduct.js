@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import Container from "../../../components/Container";
-import { ProductsContext } from "../../../App";
+import { AppContext } from "../../../App";
 import ProductItem from "../../../components/ProductItem";
 import Title from "../../../components/Title";
 
 const SomeProduct = () => {
-  const [products] = React.useContext(ProductsContext);
+  const { products } = React.useContext(AppContext);
 
   return (
     <Wrapper>

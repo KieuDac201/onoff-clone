@@ -16,9 +16,7 @@ const Cate = () => {
           tempArr.push({ id: doc.id, ...doc.data() });
         });
         setCate(tempArr);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     };
     getCategories();
   }, []);

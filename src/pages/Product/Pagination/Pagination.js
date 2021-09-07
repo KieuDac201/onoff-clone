@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 
 const Pagination = ({ totalPage, setCurrentPage, currentPage }) => {
-  console.log(totalPage);
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
   };

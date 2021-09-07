@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 import SideBar from "./SideBar/SideBar";
 import { Link } from "react-router-dom";
 import {
@@ -17,8 +15,8 @@ import {
   TitleTop,
 } from "./styled";
 import Pagination from "./Pagination/Pagination";
-import { useRouteMatch } from "react-router";
-import { ProductsContext } from "../../App";
+import { useLocation, useRouteMatch } from "react-router";
+import { AppContext } from "../../App";
 import selectGender from "../../utils/selectGender";
 import selectProductWithGender from "../../utils/selectProduct";
 import Container from "../../components/Container";
@@ -26,26 +24,51 @@ import ProductItem from "../../components/ProductItem";
 
 const Products = () => {
   const { path } = useRouteMatch();
-  const [products] = React.useContext(ProductsContext);
+  const { pathname } = useLocation();
+  const { products, querySearch, setQuerySearch } =
+    React.useContext(AppContext);
   const [productRender, setProductRender] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [productGender, setProductGender] = useState("");
   const [productSort, setProductSort] = useState("");
+  const [searchText, setSearhText] = useState("");
   const [filterList, setFilterList] = useState({
     "đồ lót": false,
     "quần áo": false,
     "bít tất": false,
   });
 
-  useEffect(() => {}, []);
-
   useEffect(() => {
+    let arrProduct = [];
+    if (!querySearch) {
+      const gender = selectGender(path);
+      setSearhText("");
+      setProductGender(gender);
+      arrProduct = selectProductWithGender(products, gender);
+    } else {
+      // handle search
+      setSearhText(querySearch);
+      arrProduct = products.filter(
+        (product) =>
+          product.name
+            .toLowerCase()
+            .includes(querySearch.trim().toLowerCase()) ||
+          product.type
+            .toLowerCase()
+            .includes(querySearch.trim().toLowerCase()) ||
+          product.gender
+            .toLowerCase()
+            .includes(querySearch.trim().toLowerCase())
+      );
+      if (arrProduct.length === 0) {
+        setProductRender([]);
+      }
+    }
     window.scrollTo(0, 0);
-    const gender = selectGender(path);
-    setProductGender(gender);
+
     // select products equavilent with gender
-    let arrProduct = selectProductWithGender(products, gender);
+
     // filter product with type value
     let tempArr = [];
     for (let key in filterList) {
@@ -56,6 +79,7 @@ const Products = () => {
         tempArr.push(...arr);
       }
     }
+
     setTotalPage(Math.ceil(tempArr.length / 10));
 
     tempArr = tempArr.slice(
@@ -78,19 +102,15 @@ const Products = () => {
       tempArr = tempArr.sort((a, b) => b.price - a.price);
     }
 
-    // pagination
-
     setProductRender(tempArr);
-  }, [products, productSort, filterList, currentPage]);
+  }, [products, productSort, filterList, currentPage, querySearch]);
 
   const handleOnChangeSort = (e) => {
     setProductSort(e.target.value);
   };
-  console.log(productRender);
 
   return (
     <>
-      <Header />
       <Wrapper>
         <Container>
           <Breadcrum>
@@ -103,7 +123,11 @@ const Products = () => {
             <SideBar setFilterList={setFilterList} filterList={filterList} />
             <ProductList>
               <ProductTop>
-                <TitleTop>Thời trang {productGender}</TitleTop>
+                {searchText ? (
+                  <TitleTop>Tìm kiếm với từ khóa "{searchText}"</TitleTop>
+                ) : (
+                  <TitleTop>Thời trang {productGender}</TitleTop>
+                )}
                 <SortTop>
                   <span>Sắp xếp theo</span>
                   <Select onChange={(e) => handleOnChangeSort(e)}>
@@ -133,7 +157,6 @@ const Products = () => {
           />
         </Container>
       </Wrapper>
-      <Footer />
     </>
   );
 };

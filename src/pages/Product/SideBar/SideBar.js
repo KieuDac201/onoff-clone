@@ -18,8 +18,6 @@ const SideBar = ({ filterList, setFilterList }) => {
   };
 
   const handleOnChange = (e) => {
-    console.log(e.target.value);
-    console.log(e.target.checked);
     setFilterList({ ...filterList, [e.target.value]: e.target.checked });
   };
 

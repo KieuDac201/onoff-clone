@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BsSearch, BsChevronLeft } from "react-icons/bs";
 import { FaUserAlt, FaHome, FaSearch } from "react-icons/fa";
 import { GiShoppingBag } from "react-icons/gi";
@@ -19,13 +19,14 @@ import {
   MenuItem,
   ReturnIcon,
   SearchIcon,
-  SearchInput,
-  SearchWrapper,
   UserIcon,
 } from "./styled";
 import { Link } from "react-router-dom";
+import Search from "../Search/Search";
+import { AppContext } from "../../App";
 
 const Header = () => {
+  const { querySearch, setQuerySearch } = useContext(AppContext);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [isShowSearch, setIsShowSearch] = useState(false);
 
@@ -37,6 +38,7 @@ const Header = () => {
   };
   const toggleShowSearch = () => {
     setIsShowSearch(!isShowSearch);
+    setQuerySearch("");
   };
 
   return (
@@ -67,10 +69,10 @@ const Header = () => {
               <MenuItem>Trẻ em</MenuItem>
             </Link>
           </Menu>
-          <SearchWrapper isShowSearch={isShowSearch}>
-            <SearchInput type="text" placeholder="Tìm kiếm" />
-            <BsSearch />
-          </SearchWrapper>
+          <Search
+            isShowSearch={isShowSearch}
+            setIsShowSearch={setIsShowSearch}
+          />
           <GroupIcon>
             <HomeIcon>
               <Link to="/">
