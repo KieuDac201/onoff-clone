@@ -18,11 +18,11 @@ import {
 } from "./styled";
 import Pagination from "./Pagination/Pagination";
 import { useRouteMatch } from "react-router";
-import { ProductsContext } from "App";
-import selectGender from "utils/selectGender";
-import selectProductWithGender from "utils/selectProduct";
-import Container from "components/Container";
-import ProductItem from "components/ProductItem";
+import { ProductsContext } from "../../App";
+import selectGender from "../../utils/selectGender";
+import selectProductWithGender from "../../utils/selectProduct";
+import Container from "../../components/Container";
+import ProductItem from "../../components/ProductItem";
 
 const Products = () => {
   const { path } = useRouteMatch();

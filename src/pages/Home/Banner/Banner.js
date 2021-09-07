@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import bannerImg from "assets/images/banner.jpg";
-import bannerImgMobile from "assets/images/banner-mobile.jpg";
+import bannerImg from "../../../assets/images/banner.jpg";
+import bannerImgMobile from "../../../assets/images/banner-mobile.jpg";
 import { Link } from "react-router-dom";
 
 const Banner = () => {
