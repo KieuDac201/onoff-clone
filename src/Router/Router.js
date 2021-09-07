@@ -2,6 +2,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Product from "../pages/Product/Product";
+import NotFound from "../pages/NotFound/NotFound";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 
 const ROUTES_MAIN = [
@@ -36,7 +37,14 @@ const ROUTES_MAIN = [
     exact: false,
     component: () => <ProductDetail />,
   },
+
   { path: "/", key: "home", exact: true, component: () => <Home /> },
+  {
+    path: "*",
+    key: "404",
+    exact: false,
+    component: () => <NotFound />,
+  },
 ];
 
 export default ROUTES_MAIN;

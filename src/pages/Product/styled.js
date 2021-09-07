@@ -44,7 +44,7 @@ export const ProductList = styled.div`
   @media (max-width: 750px) {
     grid-template-columns: repeat(2, 1fr);
   }
-  @media (max-width: 420px) {
+  @media (max-width: 400px) {
     grid-template-columns: repeat(1, 1fr);
   }
 `;
@@ -64,7 +64,7 @@ export const ProductTop = styled.div`
     align-items: flex-start;
     gap: 10px;
   }
-  @media (max-width: 420px) {
+  @media (max-width: 400px) {
     grid-column: 1/ 2;
   }
 `;

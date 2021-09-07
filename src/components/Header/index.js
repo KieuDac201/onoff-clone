@@ -5,7 +5,7 @@ import { GiShoppingBag } from "react-icons/gi";
 import { MdLocationOn } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
 import Container from "../Container";
-import logoImg from "../../assets/images/logo.svg";
+import logoImg from "assets/images/logo.svg";
 import {
   BarIcon,
   CartIcon,
@@ -73,7 +73,9 @@ const Header = () => {
           </SearchWrapper>
           <GroupIcon>
             <HomeIcon>
-              <FaHome />
+              <Link to="/">
+                <FaHome />
+              </Link>
             </HomeIcon>
             <SearchIcon onClick={toggleShowSearch}>
               <FaSearch />

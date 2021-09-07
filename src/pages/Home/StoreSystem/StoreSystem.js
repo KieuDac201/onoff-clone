@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import storeSystemImg from "../../../assets/images/store.jpg";
+import storeSystemImg from "assets/images/store.jpg";
 import styled from "styled-components";
 
 const StoreSystem = () => {

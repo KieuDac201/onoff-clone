@@ -1,16 +1,40 @@
 import React from "react";
-import { BsChevronRight } from "react-icons/bs";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
-const Pagination = () => {
+const Pagination = ({ totalPage, setCurrentPage, currentPage }) => {
+  console.log(totalPage);
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+  const handlePrePage = () => {
+    setCurrentPage(currentPage - 1);
+  };
   return (
     <PagiList>
-      <PagiItem>1</PagiItem>
-      <PagiItem>2</PagiItem>
-      <PagiItem>3</PagiItem>
-      <PagiItem>
-        <BsChevronRight />
-      </PagiItem>
+      {currentPage !== 1 && (
+        <PagiItem onClick={handlePrePage}>
+          <BsChevronLeft />
+        </PagiItem>
+      )}
+      {new Array(totalPage).fill(null).map((item, index) => {
+        return (
+          <PagiItem
+            key={uuidv4()}
+            isActive={currentPage === index + 1}
+            onClick={() => setCurrentPage(index + 1)}
+          >
+            {index + 1}
+          </PagiItem>
+        );
+      })}
+
+      {currentPage !== totalPage && (
+        <PagiItem onClick={handleNextPage}>
+          <BsChevronRight />
+        </PagiItem>
+      )}
     </PagiList>
   );
 };
@@ -28,7 +52,8 @@ const PagiItem = styled.button`
   text-align: center;
   line-height: 32px;
   margin: 0 5px;
-  background: none;
+  background: ${(props) => (props.isActive ? "#000" : "none")};
+  color: ${(props) => (props.isActive ? "#fff" : "#000")};
   border: 1px solid #ccc;
   cursor: pointer;
 `;

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import discountImg from "../../assets/images/discount-10.png";
-import formatPrice from "../../utils/formatPrice";
-import loadImg from "../../assets/images/loading.png";
+import discountImg from "assets/images/discount-10.png";
+import formatPrice from "utils/formatPrice";
+import loadImg from "assets/images/loading.png";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ProductItem = ({ images, name, price }) => {

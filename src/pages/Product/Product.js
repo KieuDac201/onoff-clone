@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Container from "../../components/Container";
-import ProductItem from "../../components/ProductItem";
 import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -20,15 +18,18 @@ import {
 } from "./styled";
 import Pagination from "./Pagination/Pagination";
 import { useRouteMatch } from "react-router";
-import { useSelector } from "react-redux";
-import { ProductsContext } from "../../App";
-import selectGender from "../../utils/selectGender";
-import selectProductWithGender from "../../utils/selectProduct";
+import { ProductsContext } from "App";
+import selectGender from "utils/selectGender";
+import selectProductWithGender from "utils/selectProduct";
+import Container from "components/Container";
+import ProductItem from "components/ProductItem";
 
 const Products = () => {
   const { path } = useRouteMatch();
   const [products] = React.useContext(ProductsContext);
   const [productRender, setProductRender] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
   const [productGender, setProductGender] = useState("");
   const [productSort, setProductSort] = useState("");
   const [filterList, setFilterList] = useState({
@@ -37,14 +38,15 @@ const Products = () => {
     "bít tất": false,
   });
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const gender = selectGender(path);
     setProductGender(gender);
+    // select products equavilent with gender
     let arrProduct = selectProductWithGender(products, gender);
+    // filter product with type value
     let tempArr = [];
     for (let key in filterList) {
       if (filterList[key]) {
@@ -54,8 +56,20 @@ const Products = () => {
         tempArr.push(...arr);
       }
     }
+    setTotalPage(Math.ceil(tempArr.length / 10));
+
+    tempArr = tempArr.slice(
+      currentPage === 1 ? 0 : 10 * currentPage - 10,
+      10 * currentPage
+    );
+
+    // sort product increment and dcrememt
     if (!tempArr.length) {
-      tempArr = arrProduct;
+      setTotalPage(Math.ceil(arrProduct.length / 10));
+      tempArr = arrProduct.slice(
+        currentPage === 1 ? 0 : 10 * currentPage - 10,
+        10 * currentPage
+      );
     }
     if (productSort === "increment") {
       tempArr = tempArr.sort((a, b) => a.price - b.price);
@@ -63,15 +77,16 @@ const Products = () => {
     if (productSort === "decrement") {
       tempArr = tempArr.sort((a, b) => b.price - a.price);
     }
-    if (productSort === "") {
-      tempArr = tempArr.sort((a, b) => 0.5 - Math.random());
-    }
+
+    // pagination
+
     setProductRender(tempArr);
-  }, [products, productSort, filterList]);
+  }, [products, productSort, filterList, currentPage]);
 
   const handleOnChangeSort = (e) => {
     setProductSort(e.target.value);
   };
+  console.log(productRender);
 
   return (
     <>
@@ -111,7 +126,11 @@ const Products = () => {
               ))}
             </ProductList>
           </Main>
-          <Pagination></Pagination>
+          <Pagination
+            totalPage={totalPage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </Container>
       </Wrapper>
       <Footer />

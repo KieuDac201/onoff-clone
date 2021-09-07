@@ -5,12 +5,15 @@ import NotFound from "./pages/NotFound/NotFound";
 import ROUTES_MAIN from "./Router/Router";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export const ProductsContext = createContext();
 
 function MainLayout() {
   return (
     <>
+      <Header />
       <Switch>
         {ROUTES_MAIN.map((route, i) => {
           return (
@@ -22,8 +25,8 @@ function MainLayout() {
             />
           );
         })}
-        <Route path="*" exact={true} component={() => <NotFound />} />
       </Switch>
+      <Footer />
     </>
   );
 }
