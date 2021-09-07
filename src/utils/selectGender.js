@@ -1,4 +1,4 @@
-const filterGender = (path) => {
+const selectGender = (path) => {
   let genderStr = "";
   if (path === "/do-nam") {
     genderStr = "nam";
@@ -12,4 +12,4 @@ const filterGender = (path) => {
   return genderStr;
 };
 
-export default filterGender;
+export default selectGender;

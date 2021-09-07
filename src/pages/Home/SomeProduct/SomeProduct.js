@@ -1,19 +1,19 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { ProductsContext } from "../../../App";
 import Container from "../../../components/Container";
 import ProductItem from "../../../components/ProductItem";
 import Title from "../../../components/Title";
 
 const SomeProduct = () => {
-  let products = useSelector((state) => state.allProduct.slice(0, 10));
+  const [products] = React.useContext(ProductsContext);
 
   return (
     <Wrapper>
       <Container>
         <Title>sản phẩm mới</Title>
         <ProductList>
-          {products.map((product) => {
+          {products.slice(0, 20).map((product) => {
             return <ProductItem {...product} key={product.id} />;
           })}
         </ProductList>

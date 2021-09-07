@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
-import CateItem from "./CateItem";
+import CateItem from "./CateItem/CateItem";
 
 const Cate = () => {
   const [cate, setCate] = useState([]);

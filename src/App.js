@@ -1,10 +1,12 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { createContext, useEffect, useState } from "react";
 import { Route, Switch } from "react-router";
 import "./App.css";
-import NotFound from "./pages/NotFound";
-import { fetchProduct } from "./redux/slice/productSlice";
-import ROUTES_MAIN from "./Router";
+import NotFound from "./pages/NotFound/NotFound";
+import ROUTES_MAIN from "./Router/Router";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./firebase";
+
+export const ProductsContext = createContext();
 
 function MainLayout() {
   return (
@@ -27,13 +29,25 @@ function MainLayout() {
 }
 
 function App() {
-  const dispatch = useDispatch();
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchProduct());
+    const fetchProduct = async () => {
+      const querySnapshot = await getDocs(collection(db, "products"));
+      let arrProducts = [];
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        arrProducts.push({ id: doc.id, ...doc.data() });
+      });
+      setProducts(arrProducts);
+    };
+    fetchProduct();
   }, []);
-
-  return <MainLayout />;
+  return (
+    <ProductsContext.Provider value={[products, setProducts]}>
+      <MainLayout />
+    </ProductsContext.Provider>
+  );
 }
 
 export default App;

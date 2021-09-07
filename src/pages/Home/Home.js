@@ -1,11 +1,11 @@
 import React from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import Banner from "./Banner";
-import BlockFeeling from "./BlockFeeling";
-import Cate from "./Categories";
-import SomeProduct from "./SomeProduct";
-import StoreSystem from "./StoreSystem";
+import Banner from "./Banner/Banner";
+import BlockFeeling from "./BlockFeeling/BlockFeeling";
+import Cate from "./Categories/Categories";
+import SomeProduct from "./SomeProduct/SomeProduct";
+import StoreSystem from "./StoreSystem/StoreSystem";
 
 const Home = () => {
   return (

@@ -1,9 +1,8 @@
-import Home from "../pages/Home";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import Product from "../pages/Product";
-import ProductDetail from "../pages/ProductDetail";
-import NotFound from "../pages/NotFound";
+import Home from "../pages/Home/Home";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
+import Product from "../pages/Product/Product";
+import ProductDetail from "../pages/ProductDetail/ProductDetail";
 
 const ROUTES_MAIN = [
   { path: "/login", key: "login", exact: false, component: () => <Login /> },

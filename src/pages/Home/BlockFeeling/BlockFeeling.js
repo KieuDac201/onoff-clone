@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../../../components/Container";
 import styled from "styled-components";
-import FeelingItem from "./FeelingItem";
+import FeelingItem from "./FeelingItem/FeelingItem";
 import dataFeeling from "./dataFeeling";
 import { v4 as uuidv4 } from "uuid";
 

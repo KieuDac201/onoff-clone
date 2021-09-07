@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import handleFilterProductCate from "./filterProductCate";
 import {
   CheckboxInput,
   CheckboxItem,
@@ -11,25 +10,18 @@ import {
   Title,
 } from "./styled";
 
-const SideBar = ({ setProductsFiltered, products, gender }) => {
+const SideBar = ({ filterList, setFilterList }) => {
   const [isShow, setIsShow] = useState(false);
-  const [filterList, setFilterList] = useState({
-    "quần áo": false,
-    "đồ lót": false,
-    "bít tất": false,
-  });
 
   const toggleShow = () => {
     setIsShow(!isShow);
   };
 
   const handleOnChange = (e) => {
+    console.log(e.target.value);
+    console.log(e.target.checked);
     setFilterList({ ...filterList, [e.target.value]: e.target.checked });
   };
-
-  useEffect(() => {
-    handleFilterProductCate(filterList, products, setProductsFiltered, gender);
-  }, [filterList]);
 
   return (
     <SideBar1>
