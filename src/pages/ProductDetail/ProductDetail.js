@@ -23,9 +23,10 @@ import ProductSizeCo from "../../components/ProductSize/ProductSize";
 import ProductService from "../../components/ProductService/ProductService";
 import ProductQuantity from "../../components/ProductQuantity/ProductQuantity";
 import ProductInfo from "../../components/ProductInfo/ProductInfo";
+import RelativeProduct from "../../components/RelativeProduct/RelativeProduct";
 
 const ProductDetail = () => {
-  const { products } = useContext(AppContext);
+  const { products, setCart, cart } = useContext(AppContext);
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [images, setImages] = useState([]);
@@ -35,7 +36,6 @@ const ProductDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     let productSelected = products.find((item) => item.id === id);
-    console.log(productSelected);
     let imageList = productSelected?.images.map((item) => ({
       original: item,
       thumbnail: item,
@@ -43,6 +43,23 @@ const ProductDetail = () => {
     setImages(imageList);
     setProduct(productSelected);
   }, [id, products]);
+
+  const addToCart = (productAdd) => {
+    const arr = cart.some((item) => item.id === productAdd.id);
+    if (arr) {
+      const arrSelect = cart.map((item) =>
+        item.id === productAdd.id
+          ? { ...item, quantity: item.quantity + productQuantity }
+          : item
+      );
+      localStorage.setItem("cart", JSON.stringify(arrSelect));
+      setCart(arrSelect);
+    } else {
+      let addItem = [...cart, { ...productAdd, quantity: productQuantity }];
+      localStorage.setItem("cart", JSON.stringify(addItem));
+      setCart(addItem);
+    }
+  };
 
   return (
     <Wrapper>
@@ -84,11 +101,14 @@ const ProductDetail = () => {
               />
               <ProductService />
 
-              <ProductBtn>Thêm vào giỏ hàng</ProductBtn>
+              <ProductBtn onClick={() => addToCart(product)}>
+                Thêm vào giỏ hàng
+              </ProductBtn>
 
               <ProductInfo />
             </ProductContent>
           </MainProductDetail>
+          <RelativeProduct gender={product.gender} />
         </Container>
       )}
     </Wrapper>

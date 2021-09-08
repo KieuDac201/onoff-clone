@@ -34,6 +34,9 @@ function MainLayout() {
 function App() {
   const [products, setProducts] = useState([]);
   const [querySearch, setQuerySearch] = useState("");
+  const [cart, setCart] = useState(
+    localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : []
+  );
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -48,7 +51,9 @@ function App() {
     fetchProduct();
   }, []);
   return (
-    <AppContext.Provider value={{ products, querySearch, setQuerySearch }}>
+    <AppContext.Provider
+      value={{ products, querySearch, setQuerySearch, cart, setCart }}
+    >
       <MainLayout />
     </AppContext.Provider>
   );

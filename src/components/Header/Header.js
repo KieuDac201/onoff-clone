@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BsSearch, BsChevronLeft } from "react-icons/bs";
 import { FaUserAlt, FaHome, FaSearch } from "react-icons/fa";
 import { GiShoppingBag } from "react-icons/gi";
@@ -17,6 +17,7 @@ import {
   Logo,
   Menu,
   MenuItem,
+  Overlay,
   ReturnIcon,
   SearchIcon,
   UserIcon,
@@ -24,11 +25,15 @@ import {
 import { Link } from "react-router-dom";
 import Search from "../Search/Search";
 import { AppContext } from "../../App";
+import Cart from "../Cart/Cart";
 
 const Header = () => {
+  const { cart } = useContext(AppContext);
   const { querySearch, setQuerySearch } = useContext(AppContext);
   const [isShowMenu, setIsShowMenu] = useState(false);
+  const [isShowCart, setIsShowCart] = useState(false);
   const [isShowSearch, setIsShowSearch] = useState(false);
+  const [countProductCart, setCountProductCart] = useState(0);
 
   const toggleShowMenu = () => {
     setIsShowMenu(!isShowMenu);
@@ -41,9 +46,19 @@ const Header = () => {
     setQuerySearch("");
   };
 
+  useEffect(() => {
+    let countProduct = 0;
+    cart.forEach((item) => {
+      countProduct += item.quantity;
+    });
+    setCountProductCart(countProduct);
+  }, [cart]);
+
   return (
     <ContainerWrapper>
       <Container>
+        <Overlay isShowCart={isShowCart} onClick={() => setIsShowCart(false)} />
+        <Cart isShowCart={isShowCart} setIsShowCart={setIsShowCart} />
         <HeaderContainer>
           {!isShowMenu && (
             <BarIcon onClick={toggleShowMenu}>
@@ -89,7 +104,8 @@ const Header = () => {
               <FaUserAlt />
             </UserIcon>
           </GroupIcon>
-          <CartIcon>
+          <CartIcon onClick={() => setIsShowCart(true)}>
+            <p>{countProductCart}</p>
             <GiShoppingBag />
           </CartIcon>
         </HeaderContainer>

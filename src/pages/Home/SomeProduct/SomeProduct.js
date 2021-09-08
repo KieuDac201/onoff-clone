@@ -29,7 +29,7 @@ const Wrapper = styled.div`
   padding: 50px 0;
 `;
 
-const ProductList = styled.div`
+export const ProductList = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 20px;

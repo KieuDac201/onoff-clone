@@ -111,7 +111,19 @@ export const LocationIcon = styled.div`
   }
 `;
 export const UserIcon = styled(LocationIcon)``;
-export const CartIcon = styled(LocationIcon)``;
+export const CartIcon = styled(LocationIcon)`
+  position: relative;
+  font-size: 25px;
+  p {
+    position: absolute;
+    color: #fff;
+    font-size: 10px;
+    width: 20px;
+    text-align: center;
+    left: 23%;
+    top: 9px;
+  }
+`;
 export const HomeIcon = styled(LocationIcon)`
   display: none;
   @media (max-width: 1010px) {
@@ -123,4 +135,17 @@ export const SearchIcon = styled(LocationIcon)`
   @media (max-width: 1010px) {
     display: block;
   }
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 54;
+  transition: 0.2s linear;
+  opacity: ${(props) => (props.isShowCart ? "1" : "0")};
+  display: ${(props) => (props.isShowCart ? "block" : "none")};
+  background: rgba(0, 0, 0, 0.5);
 `;
