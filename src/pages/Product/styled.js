@@ -3,24 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   padding-top: 100px;
 `;
-export const Breadcrum = styled.div`
-  display: flex;
-  font-size: 12px;
-`;
-export const BreadcrumItem = styled.p`
-  padding: 0px 10px;
-  border-right: 1px solid;
-  text-transform: uppercase;
-  font-weight: 500;
-  cursor: pointer;
-  color: #999999;
-  &:last-child {
-    border-right: none;
-    color: #000;
-  }
-  &:first-child {
-  }
-`;
+
 export const Main = styled.div`
   display: grid;
   grid-template-columns: 1fr 4fr;

@@ -4,8 +4,6 @@ import SideBar from "./SideBar/SideBar";
 import { Link } from "react-router-dom";
 import {
   Wrapper,
-  Breadcrum,
-  BreadcrumItem,
   Main,
   Option,
   ProductList,
@@ -21,6 +19,7 @@ import selectGender from "../../utils/selectGender";
 import selectProductWithGender from "../../utils/selectProduct";
 import Container from "../../components/Container";
 import ProductItem from "../../components/ProductItem";
+import { Breadcrum, BreadcrumItem } from "../../components/Breadcrum/Breadcrum";
 
 const Products = () => {
   const { path } = useRouteMatch();

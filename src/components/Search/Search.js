@@ -28,7 +28,7 @@ const Search = ({ isShowSearch, setIsShowSearch }) => {
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
-      <BsSearch />
+      <BsSearch onClick={(e) => handleSubmit(e)} />
     </SearchWrapper>
   );
 };
