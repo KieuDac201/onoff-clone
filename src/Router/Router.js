@@ -38,7 +38,7 @@ const ROUTES_MAIN = [
     component: () => <Product />,
   },
   {
-    path: "/product-detail",
+    path: "/product-detail/:id",
     key: "product-detail",
     exact: false,
     component: () => <ProductDetail />,

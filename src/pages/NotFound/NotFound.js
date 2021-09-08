@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "../../components/Container";
-import Title from "../../components/Title";
+import Title from "../../components/Title/Title";
 import styled from "styled-components";
 import notFoundImg from "../../assets/images/404.jpg";
 import { Link } from "react-router-dom";

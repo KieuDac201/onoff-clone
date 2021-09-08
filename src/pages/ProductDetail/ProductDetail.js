@@ -1,10 +1,6 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "../../components/Container";
-import styled from "styled-components";
 import { Breadcrum, BreadcrumItem } from "../../components/Breadcrum/Breadcrum";
-import { AiOutlineBarChart, AiFillIdcard } from "react-icons/ai";
-import { BsArrowLeftRight, BsArrowCounterclockwise } from "react-icons/bs";
-import { FaCarSide } from "react-icons/fa";
 import {
   ProductBtn,
   Wrapper,
@@ -17,94 +13,84 @@ import {
   ProductPrice,
   ProductNewPrice,
   ProductOldPrice,
-  ProductSize,
-  ProductSizeTitle,
-  ProductSizeList,
-  ProductSizeItem,
-  ProductSizeInfo,
-  ProductQuantity,
-  ProductQuantityBtns,
-  ProductQuantityBtn,
-  ProductServices,
-  ProductService,
 } from "./styled";
 import ProductImageGallery from "../../components/ProductImageGallery/ProductImageGallery";
+import { useParams } from "react-router";
+import { AppContext } from "../../App";
+import formatPrice from "../../utils/formatPrice";
+import { Link } from "react-router-dom";
+import ProductSizeCo from "../../components/ProductSize/ProductSize";
+import ProductService from "../../components/ProductService/ProductService";
+import ProductQuantity from "../../components/ProductQuantity/ProductQuantity";
+import ProductInfo from "../../components/ProductInfo/ProductInfo";
 
 const ProductDetail = () => {
+  const { products } = useContext(AppContext);
+  const { id } = useParams();
+  const [product, setProduct] = useState([]);
+  const [images, setImages] = useState([]);
+  const [productSize, setProductSize] = useState("");
+  const [productQuantity, setProductQuantity] = useState(1);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    let productSelected = products.find((item) => item.id === id);
+    console.log(productSelected);
+    let imageList = productSelected?.images.map((item) => ({
+      original: item,
+      thumbnail: item,
+    }));
+    setImages(imageList);
+    setProduct(productSelected);
+  }, [id, products]);
+
   return (
     <Wrapper>
-      <Container>
-        <Breadcrum>
-          <BreadcrumItem>Trang chu</BreadcrumItem>
-          <BreadcrumItem>Trang chu</BreadcrumItem>
-          <BreadcrumItem>Trang chu</BreadcrumItem>
-        </Breadcrum>
-        <MainProductDetail>
-          <ProductImageGallery />
-          <ProductContent>
-            <ProductName>QUẦN LÓT NỮ BRIEF SEAMLESS</ProductName>
-            <ProductNum>
-              <ProductCode>SKU#: H16BU20073</ProductCode>
-              <ProductSold>Đã bán 2868</ProductSold>
-            </ProductNum>
-            <ProductPrice>
-              <ProductNewPrice>119.000đ</ProductNewPrice>
-              <ProductOldPrice>149.000đ</ProductOldPrice>
-            </ProductPrice>
-            <ProductSize>
-              <ProductSizeTitle>KÍCH CỠ:</ProductSizeTitle>
-              <ProductSizeList>
-                <ProductSizeItem>s</ProductSizeItem>
-                <ProductSizeItem>s</ProductSizeItem>
-                <ProductSizeItem>s</ProductSizeItem>
-                <ProductSizeItem>s</ProductSizeItem>
-                <ProductSizeInfo>
-                  <AiOutlineBarChart />
-                  bảng size
-                </ProductSizeInfo>
-              </ProductSizeList>
-            </ProductSize>
-            <ProductQuantity>
-              <p>SỐ LƯỢNG:</p>
-              <ProductQuantityBtns>
-                <ProductQuantityBtn>-</ProductQuantityBtn>
-                <ProductQuantityBtn>2</ProductQuantityBtn>
-                <ProductQuantityBtn>+</ProductQuantityBtn>
-              </ProductQuantityBtns>
-            </ProductQuantity>
-            <ProductServices>
-              <ProductService>
-                <FaCarSide />
-                <p>
-                  <span>[07-10/09] MIỄN PHÍ VẬN CHUYỂN</span>
-                  cho mọi đơn hàng
-                </p>
-              </ProductService>
-              <ProductService>
-                <BsArrowCounterclockwise />
-                <p>
-                  <span>HOÀN TIỀN 100%</span>
-                  cho các sản phẩm không đúng với đơn hàng
-                </p>
-              </ProductService>
-              <ProductService>
-                <AiFillIdcard />
-                <p>
-                  <span>KIỂM TRA HÀNG TRƯỚC KHI THANH TOÁN</span>
-                </p>
-              </ProductService>
-              <ProductService>
-                <BsArrowLeftRight />
-                <p>
-                  <span>MIỄN PHÍ ĐỔI TRẢ</span>
-                  trong vòng 15 ngày kể từ ngày mua hàng.
-                </p>
-              </ProductService>
-            </ProductServices>
-            <ProductBtn>Thêm vào giỏ hàng</ProductBtn>
-          </ProductContent>
-        </MainProductDetail>
-      </Container>
+      {product && (
+        <Container>
+          <Breadcrum>
+            <Link to="/">
+              <BreadcrumItem>Trang chủ</BreadcrumItem>
+            </Link>
+            <Link
+              to={
+                product.gender?.toLowerCase() === "nam" ? "/do-nam" : "/do-nu"
+              }
+            >
+              <BreadcrumItem>Sản phẩm {product.gender}</BreadcrumItem>
+            </Link>
+            <BreadcrumItem last>{product.name}</BreadcrumItem>
+          </Breadcrum>
+          <MainProductDetail>
+            <ProductImageGallery images={images} />
+            <ProductContent>
+              <ProductName>{product.name}</ProductName>
+              <ProductNum>
+                <ProductCode>SKU#: {id}</ProductCode>
+                <ProductSold>Đã bán {product.sold}</ProductSold>
+              </ProductNum>
+              <ProductPrice>
+                <ProductNewPrice>{formatPrice(product.price)}</ProductNewPrice>
+                <ProductOldPrice>{formatPrice(product.price)}</ProductOldPrice>
+              </ProductPrice>
+
+              <ProductSizeCo
+                setProductSize={setProductSize}
+                productSize={productSize}
+              />
+              <ProductQuantity
+                productQuantity={productQuantity}
+                setProductQuantity={setProductQuantity}
+              />
+              <ProductService />
+
+              <ProductBtn>Thêm vào giỏ hàng</ProductBtn>
+
+              <ProductInfo />
+            </ProductContent>
+          </MainProductDetail>
+        </Container>
+      )}
     </Wrapper>
   );
 };

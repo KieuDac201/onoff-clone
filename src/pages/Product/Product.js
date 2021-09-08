@@ -13,17 +13,16 @@ import {
   TitleTop,
 } from "./styled";
 import Pagination from "./Pagination/Pagination";
-import { useLocation, useRouteMatch } from "react-router";
+import { useRouteMatch } from "react-router";
 import { AppContext } from "../../App";
 import selectGender from "../../utils/selectGender";
 import selectProductWithGender from "../../utils/selectProduct";
 import Container from "../../components/Container";
-import ProductItem from "../../components/ProductItem";
+import ProductItem from "../../components/ProductItem/ProductItem";
 import { Breadcrum, BreadcrumItem } from "../../components/Breadcrum/Breadcrum";
 
 const Products = () => {
   const { path } = useRouteMatch();
-  const { pathname } = useLocation();
   const { products, querySearch, setQuerySearch } =
     React.useContext(AppContext);
   const [productRender, setProductRender] = useState([]);
@@ -116,7 +115,7 @@ const Products = () => {
             <BreadcrumItem>
               <Link to="/">Trang chủ</Link>
             </BreadcrumItem>
-            <BreadcrumItem>Sản phẩm {productGender}</BreadcrumItem>
+            <BreadcrumItem last>Sản phẩm {productGender}</BreadcrumItem>
           </Breadcrum>
           <Main>
             <SideBar setFilterList={setFilterList} filterList={filterList} />
@@ -145,6 +144,7 @@ const Products = () => {
                   name={product.name}
                   price={product.price}
                   images={product.images}
+                  id={product.id}
                 />
               ))}
             </ProductList>

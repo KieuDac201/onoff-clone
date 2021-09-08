@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Container from "../../../components/Container";
 import { AppContext } from "../../../App";
-import ProductItem from "../../../components/ProductItem";
-import Title from "../../../components/Title";
+import ProductItem from "../../../components/ProductItem/ProductItem";
+import Title from "../../../components/Title/Title";
 
 const SomeProduct = () => {
   const { products } = React.useContext(AppContext);
