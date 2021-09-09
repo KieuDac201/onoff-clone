@@ -113,7 +113,7 @@ export const LocationIcon = styled.div`
 export const UserIcon = styled(LocationIcon)``;
 export const CartIcon = styled(LocationIcon)`
   position: relative;
-  font-size: 25px;
+  font-size: 27px;
   p {
     position: absolute;
     color: #fff;
@@ -121,7 +121,7 @@ export const CartIcon = styled(LocationIcon)`
     width: 20px;
     text-align: center;
     left: 23%;
-    top: 9px;
+    top: 10px;
   }
 `;
 export const HomeIcon = styled(LocationIcon)`

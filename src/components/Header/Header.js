@@ -101,7 +101,9 @@ const Header = () => {
               <MdLocationOn />
             </LocationIcon>
             <UserIcon>
-              <FaUserAlt />
+              <Link to="/login">
+                <FaUserAlt />
+              </Link>
             </UserIcon>
           </GroupIcon>
           <CartIcon onClick={() => setIsShowCart(true)}>
