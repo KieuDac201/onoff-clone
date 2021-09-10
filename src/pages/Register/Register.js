@@ -21,11 +21,13 @@ import {
 } from "../Login/styled";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { schemaRegister } from "../../utils/yup";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import PulseLoader from "react-spinners/PulseLoader";
+import showToast from "../../utils/showToast";
 
 const Register = () => {
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
   const [errorAlready, setErrorAlready] = useState({
     isAlready: false,
     message: "",
@@ -41,28 +43,23 @@ const Register = () => {
   });
 
   const onSubmit = (data) => {
+    setIsLoading(true);
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
+        // const user = userCredential.user;
         setErrorAlready({ isAlready: false, message: "" });
-        toast.success("Đăng ký thành công!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        showToast("Đăng ký thành công!", "success");
         reset();
         history.replace("/");
+        setIsLoading(false);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
         setErrorAlready({ isAlready: true, message: "Email đã tồn tại" });
+        setIsLoading(false);
       });
   };
 
@@ -100,7 +97,13 @@ const Register = () => {
               </FormGroup>
               <FormError>{errors.cPassword?.message}</FormError>
               <FormButtons>
-                <button type="submit">Đăng ký</button>
+                <button type="submit">
+                  {isLoading ? (
+                    <PulseLoader color="#ffffff" loading={true} size={15} />
+                  ) : (
+                    "Đăng ký"
+                  )}
+                </button>
               </FormButtons>
             </LoginForm>
           </LoginLeft>
@@ -111,7 +114,6 @@ const Register = () => {
             </Link>
           </LoginRight>
         </LoginMain>
-        <ToastContainer />
       </Container>
     </Wrapper>
   );

@@ -1,8 +1,16 @@
-import React, { useState } from "react";
-import Container from "../../components/Container";
-import Button from "../../components/Button/Button";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useHistory } from "react-router-dom";
+import Button from "../../components/Button/Button";
+import Container from "../../components/Container";
+import { schemaLogin } from "../../utils/yup";
+import PulseLoader from "react-spinners/PulseLoader";
 import {
   FormButtonForgot,
   FormButtons,
@@ -19,14 +27,12 @@ import {
   LoginTitle,
   Wrapper,
 } from "./styled";
-import { Link } from "react-router-dom";
-import { schemaLogin } from "../../utils/yup";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useHistory } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import showToast from "../../utils/showToast";
 
 const Login = () => {
   const history = useHistory();
+  const auth = getAuth();
+  const [isLoading, setIsLoading] = useState(false);
   const [errorIncorect, setErrorIncorect] = useState({
     isInCorect: false,
     message: "",
@@ -40,36 +46,33 @@ const Login = () => {
     resolver: yupResolver(schemaLogin),
   });
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        history.replace("/user-info");
+      }
+    });
+  }, []);
+
   const onSubmit = (data) => {
-    const auth = getAuth();
+    setIsLoading(true);
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-
-        history.replace("/");
-        toast.success("Đăng nhập thành công!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        showToast("Đăng nhập thành công", "success");
         setErrorIncorect({
           isInCorect: false,
           message: "",
         });
         reset();
+        setIsLoading(false);
+        history.replace("/");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
         setErrorIncorect({
           isInCorect: true,
           message: "Email hoặc mật khẩu không đúng",
         });
+        setIsLoading(false);
       });
   };
   return (
@@ -101,7 +104,13 @@ const Login = () => {
               </FormGroup>
               <FormError>{errors.password?.message}</FormError>
               <FormButtons>
-                <button type="submit">Đăng nhập</button>
+                <button type="submit">
+                  {isLoading ? (
+                    <PulseLoader color="#ffffff" loading={true} size={15} />
+                  ) : (
+                    "Đăng nhập"
+                  )}
+                </button>
                 <FormButtonForgot>Quên mật khẩu</FormButtonForgot>
               </FormButtons>
             </LoginForm>
@@ -109,11 +118,10 @@ const Login = () => {
           <LoginRight>
             <LoginClientState>Khách hàng mới</LoginClientState>
             <Link to="/register">
-              <Button fill text="Đăng ký" />
+              <Button fill="true" text="Đăng ký" />
             </Link>
           </LoginRight>
         </LoginMain>
-        <ToastContainer />
       </Container>
     </Wrapper>
   );

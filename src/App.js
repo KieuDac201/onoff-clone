@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { Route, Switch } from "react-router";
 import "./App.css";
-import NotFound from "./pages/NotFound/NotFound";
 import ROUTES_MAIN from "./Router/Router";
+import "react-toastify/dist/ReactToastify.css";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 import Header from "./components/Header/Header";
@@ -34,6 +34,7 @@ function MainLayout() {
 function App() {
   const [products, setProducts] = useState([]);
   const [querySearch, setQuerySearch] = useState("");
+  const [user, setUser] = useState(null);
   const [cart, setCart] = useState(
     localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : []
   );
@@ -52,7 +53,15 @@ function App() {
   }, []);
   return (
     <AppContext.Provider
-      value={{ products, querySearch, setQuerySearch, cart, setCart }}
+      value={{
+        products,
+        querySearch,
+        setQuerySearch,
+        cart,
+        setCart,
+        user,
+        setUser,
+      }}
     >
       <MainLayout />
     </AppContext.Provider>

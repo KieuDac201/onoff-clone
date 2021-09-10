@@ -26,6 +26,7 @@ import { Link } from "react-router-dom";
 import Search from "../Search/Search";
 import { AppContext } from "../../App";
 import Cart from "../Cart/Cart";
+import { ToastContainer } from "react-toastify";
 
 const Header = () => {
   const { cart } = useContext(AppContext);
@@ -112,6 +113,7 @@ const Header = () => {
           </CartIcon>
         </HeaderContainer>
       </Container>
+      <ToastContainer />
     </ContainerWrapper>
   );
 };

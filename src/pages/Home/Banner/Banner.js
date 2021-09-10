@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
-    <Link to="/nam">
+    <Link to="/do-nam">
       <Wrapper></Wrapper>
     </Link>
   );

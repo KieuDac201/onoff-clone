@@ -4,6 +4,7 @@ import Register from "../pages/Register/Register";
 import Product from "../pages/Product/Product";
 import NotFound from "../pages/NotFound/NotFound";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
+import UserInfo from "../pages/UserInfo/UserInfo";
 
 const ROUTES_MAIN = [
   { path: "/login", key: "login", exact: false, component: () => <Login /> },
@@ -42,6 +43,12 @@ const ROUTES_MAIN = [
     key: "product-detail",
     exact: false,
     component: () => <ProductDetail />,
+  },
+  {
+    path: "/user-info",
+    key: "user-info",
+    exact: false,
+    component: () => <UserInfo />,
   },
 
   { path: "/", key: "home", exact: true, component: () => <Home /> },

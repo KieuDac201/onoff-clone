@@ -23,8 +23,7 @@ import { Breadcrum, BreadcrumItem } from "../../components/Breadcrum/Breadcrum";
 
 const Products = () => {
   const { path } = useRouteMatch();
-  const { products, querySearch, setQuerySearch } =
-    React.useContext(AppContext);
+  const { products, querySearch } = React.useContext(AppContext);
   const [productRender, setProductRender] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
@@ -101,7 +100,7 @@ const Products = () => {
     }
 
     setProductRender(tempArr);
-  }, [products, productSort, filterList, currentPage, querySearch]);
+  }, [products, productSort, filterList, currentPage, querySearch, path]);
 
   const handleOnChangeSort = (e) => {
     setProductSort(e.target.value);
