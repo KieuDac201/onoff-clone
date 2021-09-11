@@ -18,6 +18,7 @@ export const Main = styled.div`
 `;
 
 export const ProductList = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
@@ -67,3 +68,19 @@ export const Select = styled.select`
   margin: 0 12px;
 `;
 export const Option = styled.option``;
+export const ProductLoading = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+`;
+export const LoadingImg = styled.img`
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 50px;
+  transform: translate(-50%, -50%);
+  background: #fff;
+`;

@@ -10,13 +10,14 @@ import filterProductGender from "../../utils/filterProductGender";
 import filterProductSearch from "../../utils/filterProductSearch";
 import filterProductType from "../../utils/filterProductType";
 import selectGender from "../../utils/selectGender";
-import selectProductWithGender from "../../utils/selectProduct";
 import Pagination from "./Pagination/Pagination";
 import SideBar from "./SideBar/SideBar";
 import {
+  LoadingImg,
   Main,
   Option,
   ProductList,
+  ProductLoading,
   ProductTop,
   Select,
   SortTop,
@@ -27,6 +28,7 @@ import {
 const Products = () => {
   const { path } = useRouteMatch();
   const { pathname } = useLocation();
+  const [loading, setLoading] = useState(false);
   const { products, querySearch, setQuerySearch } =
     React.useContext(AppContext);
   const [productRender, setProductRender] = useState([]);
@@ -40,13 +42,14 @@ const Products = () => {
   });
 
   useEffect(() => {
-    if (path === "/do-nam" || path === "/do-nữ" || path === "/do-tre-em") {
+    window.scrollTo(0, 0);
+    if (path === "/do-nam" || path === "/do-nu" || path === "/do-tre-em") {
       setQuerySearch("");
     }
     let arrFilter = [];
     if (
       path !== "/do-nam" &&
-      path !== "/do-nữ" &&
+      path !== "/do-nu" &&
       path !== "/do-tre-em" &&
       querySearch
     ) {
@@ -64,7 +67,7 @@ const Products = () => {
       arrFilter = arrProductGender;
       setProductRender(arrProductGender);
     }
-    // filter width type
+    // filter and sort width type
     let arr = filterProductType(filterList, arrFilter);
     if (arr.length) {
       if (productSort === "") {
@@ -76,89 +79,32 @@ const Products = () => {
       }
       setProductRender(arr);
     } else {
+      let arr = [];
       if (productSort === "") {
-        setProductRender(arrFilter);
+        arr = arrFilter;
       } else if (productSort === "increment") {
-        let arr = arrFilter.sort((a, b) => a.price - b.price);
-        console.log(arrFilter);
-        setProductRender(arr);
+        arr = arrFilter.sort((a, b) => a.price - b.price);
       } else {
-        let arr = arrFilter.sort((a, b) => b.price - a.price);
-        setProductRender(arr);
+        arr = arrFilter.sort((a, b) => b.price - a.price);
       }
+      setProductRender(arr);
     }
   }, [pathname, filterList, productSort]);
-
-  // useEffect(() => {
-  //   let arrProduct = [];
-  //   if (!querySearch) {
-  //     const gender = selectGender(path);
-  //     setSearhText("");
-  //     setProductGender(gender);
-  //     arrProduct = selectProductWithGender(products, gender);
-  //   } else {
-  //     // handle search
-  //     setSearhText(querySearch);
-  //     arrProduct = products.filter(
-  //       (product) =>
-  //         product.name
-  //           .toLowerCase()
-  //           .includes(querySearch.trim().toLowerCase()) ||
-  //         product.type
-  //           .toLowerCase()
-  //           .includes(querySearch.trim().toLowerCase()) ||
-  //         product.gender
-  //           .toLowerCase()
-  //           .includes(querySearch.trim().toLowerCase())
-  //     );
-  //     if (arrProduct.length === 0) {
-  //       setProductRender([]);
-  //     }
-  //   }
-  //   window.scrollTo(0, 0);
-
-  //   // select products equavilent with gender
-
-  //   // filter product with type value
-  //   let tempArr = [];
-  //   for (let key in filterList) {
-  //     if (filterList[key]) {
-  //       let arr = arrProduct.filter(
-  //         (product) => product.type.toLowerCase() === key
-  //       );
-  //       tempArr.push(...arr);
-  //     }
-  //   }
-
-  //   setTotalPage(Math.ceil(tempArr.length / 10));
-
-  //   tempArr = tempArr.slice(
-  //     currentPage === 1 ? 0 : 10 * currentPage - 10,
-  //     10 * currentPage
-  //   );
-
-  //   // sort product increment and dcrememt
-  //   if (!tempArr.length) {
-  //     setTotalPage(Math.ceil(arrProduct.length / 10));
-  //     tempArr = arrProduct.slice(
-  //       currentPage === 1 ? 0 : 10 * currentPage - 10,
-  //       10 * currentPage
-  //     );
-  //   }
-  //   if (productSort === "increment") {
-  //     tempArr = tempArr.sort((a, b) => a.price - b.price);
-  //   }
-  //   if (productSort === "decrement") {
-  //     tempArr = tempArr.sort((a, b) => b.price - a.price);
-  //   }
-
-  //   setProductRender(tempArr);
-  // }, [products, productSort, filterList, currentPage, querySearch, path]);
 
   const handleOnChangeSort = (e) => {
     setProductSort(e.target.value);
     console.log();
   };
+
+  useEffect(() => {
+    setLoading(true);
+    const id = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => {
+      clearTimeout(id);
+    };
+  }, [pathname]);
 
   return (
     <>
@@ -200,6 +146,11 @@ const Products = () => {
                   id={product.id}
                 />
               ))}
+              {loading && (
+                <ProductLoading>
+                  <LoadingImg src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" />
+                </ProductLoading>
+              )}
             </ProductList>
           </Main>
           {/* <Pagination
