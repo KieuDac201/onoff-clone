@@ -16,7 +16,6 @@ import {
 } from "./styled";
 import ProductImageGallery from "../../components/ProductImageGallery/ProductImageGallery";
 import { useParams } from "react-router";
-import { AppContext } from "../../App";
 import formatPrice from "../../utils/formatPrice";
 import { Link } from "react-router-dom";
 import ProductSizeCo from "../../components/ProductSize/ProductSize";
@@ -24,6 +23,7 @@ import ProductService from "../../components/ProductService/ProductService";
 import ProductQuantity from "../../components/ProductQuantity/ProductQuantity";
 import ProductInfo from "../../components/ProductInfo/ProductInfo";
 import RelativeProduct from "../../components/RelativeProduct/RelativeProduct";
+import { AppContext } from "../../context/AppProvider";
 
 const ProductDetail = () => {
   const { products, setCart, cart } = useContext(AppContext);

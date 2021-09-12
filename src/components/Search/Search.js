@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { BsSearch } from "react-icons/bs";
 import { useHistory } from "react-router";
-import { AppContext } from "../../App";
+import { AppContext } from "../../context/AppProvider";
 
 const Search = ({ isShowSearch, setIsShowSearch }) => {
   const { querySearch, setQuerySearch } = useContext(AppContext);

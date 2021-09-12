@@ -14,8 +14,8 @@ import {
 } from "../Cart/styled";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import { FaTrashAlt } from "react-icons/fa";
-import { AppContext } from "../../App";
 import formatPrice from "../../utils/formatPrice";
+import { AppContext } from "../../context/AppProvider";
 
 const CartItem = ({ img, name, quantity, price, id }) => {
   const { cart, setCart } = useContext(AppContext);

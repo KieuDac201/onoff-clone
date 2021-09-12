@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import discountImg from "../../assets/images/discount-10.png";
 import formatPrice from "../../utils/formatPrice";
 import loadImg from "../../assets/images/loading.png";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
@@ -35,7 +36,7 @@ const ProductItem = ({ images, name, price, id }) => {
           effect="opacity"
           onMouseOver={handleHover}
           onMouseLeave={handleLeave}
-          placeholder={<img src={loadImg} alt="Loading" />}
+          placeholderSrc={loadImg}
         />
       </Link>
       <ProductName>{name}</ProductName>

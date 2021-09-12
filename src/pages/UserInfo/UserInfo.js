@@ -6,6 +6,8 @@ import Container from "../../components/Container";
 import FormEdit from "../../components/FormEdit/FormEdit";
 import UserImgProfile from "../../components/UserImgProfile/UserImgProfile";
 import showToast from "../../utils/showToast";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+
 import {
   UserInfoBtn,
   UserInfoBtns,
@@ -27,7 +29,8 @@ const UserInfo = () => {
   const history = useHistory();
   const auth = getAuth();
   const [user, setUser] = useState(null);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isLoad, setIsLoad] = useState(false);
+  const [isShowFormEdit, setIsShowFormEdit] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -42,7 +45,7 @@ const UserInfo = () => {
         history.replace("/login");
       }
     });
-  }, [isSuccess]);
+  }, [isLoad]);
 
   const handleLogOut = () => {
     getAuth();
@@ -55,6 +58,25 @@ const UserInfo = () => {
       });
   };
 
+  const handleOnchange = (e) => {
+    console.log(e.target.files[0]);
+  };
+
+  const handleClick = () => {
+    // Create a root reference
+    const storage = getStorage();
+
+    // Create a reference to 'mountains.jpg'
+    const mountainsRef = ref(storage, "mountains.jpg");
+
+    // Create a reference to 'images/mountains.jpg'
+    const mountainImagesRef = ref(storage, "images/mountains.jpg");
+
+    // While the file names are the same, the references point to different files
+    // mountainsRef.name === mountainImagesRef.name; // true
+    // mountainsRef.fullPath === mountainImagesRef.fullPath;
+  };
+
   return (
     <Wrapper>
       <Container>
@@ -64,7 +86,9 @@ const UserInfo = () => {
             <UserInfoSelect onClick={handleLogOut}>Đăng xuất</UserInfoSelect>
           </UserInfoLeft>
           <UserInfoRight>
-            <UserInfoTitle>TÀI KHOẢN CỦA TÔI</UserInfoTitle>
+            <UserInfoTitle onClick={handleClick}>
+              TÀI KHOẢN CỦA TÔI
+            </UserInfoTitle>
             <UserInfoSubTitle>Thông tin tài khoản</UserInfoSubTitle>
             <UserInfoList>
               <UserInfoItem>
@@ -76,20 +100,30 @@ const UserInfo = () => {
                 <UserInfoEmail>{user?.email}</UserInfoEmail>
 
                 <UserInfoBtns>
-                  <UserInfoBtn>Sửa</UserInfoBtn>
+                  <UserInfoBtn
+                    onClick={() => setIsShowFormEdit(!isShowFormEdit)}
+                  >
+                    Sửa
+                  </UserInfoBtn>
                   <UserInfoBtn>Thay đổi password</UserInfoBtn>
                 </UserInfoBtns>
               </UserInfoItem>
               <UserInfoItem>
                 <h4>Ảnh đại diện</h4>
-                <UserImgProfile photoUrl={user?.photoUrl} />
+                <label htmlFor="file">
+                  <UserImgProfile photoUrl={user?.photoUrl} />
+                </label>
+                <input type="file" id="file" hidden onChange={handleOnchange} />
               </UserInfoItem>
               <UserInfoItem>
-                <FormEdit
-                  name={user?.displayName}
-                  email={user?.email}
-                  setIsSuccess={setIsSuccess}
-                />
+                {isShowFormEdit && (
+                  <FormEdit
+                    name={user?.displayName}
+                    setIsLoad={setIsLoad}
+                    isLoad={isLoad}
+                    setIsShowFormEdit={setIsShowFormEdit}
+                  />
+                )}
               </UserInfoItem>
             </UserInfoList>
           </UserInfoRight>

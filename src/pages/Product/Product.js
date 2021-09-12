@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
-import { useLocation, useParams, useRouteMatch } from "react-router";
+import { useLocation, useRouteMatch } from "react-router";
 import { Link } from "react-router-dom";
-import { AppContext } from "../../App";
 import { Breadcrum, BreadcrumItem } from "../../components/Breadcrum/Breadcrum";
 import Container from "../../components/Container";
+import Loading from "../../components/Loading/Loading";
 import ProductItem from "../../components/ProductItem/ProductItem";
+import { AppContext } from "../../context/AppProvider";
 import filterProductGender from "../../utils/filterProductGender";
 import filterProductSearch from "../../utils/filterProductSearch";
 import filterProductType from "../../utils/filterProductType";
 import selectGender from "../../utils/selectGender";
-import Pagination from "./Pagination/Pagination";
 import SideBar from "./SideBar/SideBar";
 import {
-  LoadingImg,
   Main,
   Option,
   ProductList,
-  ProductLoading,
   ProductTop,
   Select,
   SortTop,
@@ -42,6 +40,7 @@ const Products = () => {
   });
 
   useEffect(() => {
+    setLoading(true);
     window.scrollTo(0, 0);
     if (path === "/do-nam" || path === "/do-nu" || path === "/do-tre-em") {
       setQuerySearch("");
@@ -100,11 +99,11 @@ const Products = () => {
     setLoading(true);
     const id = setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
     return () => {
       clearTimeout(id);
     };
-  }, [pathname]);
+  }, [pathname, filterList, productSort]);
 
   return (
     <>
@@ -146,11 +145,7 @@ const Products = () => {
                   id={product.id}
                 />
               ))}
-              {loading && (
-                <ProductLoading>
-                  <LoadingImg src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" />
-                </ProductLoading>
-              )}
+              {loading && <Loading />}
             </ProductList>
           </Main>
           {/* <Pagination

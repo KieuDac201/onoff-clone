@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { GrFormClose } from "react-icons/gr";
-import { AppContext } from "../../App";
+import { Link } from "react-router-dom";
+import { AppContext } from "../../context/AppProvider";
 import formatPrice from "../../utils/formatPrice";
 import CartItem from "../CartItem/CartItem";
 import {
@@ -34,7 +35,7 @@ const Cart = ({ setIsShowCart, isShowCart }) => {
         </CartBtnClose>
       </CartTitle>
       <CartList>
-        {cart.length ? (
+        {cart?.length ? (
           cart.map((item) => {
             return (
               <CartItem
@@ -55,7 +56,9 @@ const Cart = ({ setIsShowCart, isShowCart }) => {
         <CartTotalTitle>Tổng tiền hàng</CartTotalTitle>
         <CartTotalPrice>{formatPrice(totalPriceCart)}</CartTotalPrice>
       </CartTotal>
-      <CartButton>Đặt hàng</CartButton>
+      <Link to="/checkout" onClick={() => setIsShowCart(false)}>
+        <CartButton>Đặt hàng</CartButton>
+      </Link>
     </CartContainer>
   );
 };

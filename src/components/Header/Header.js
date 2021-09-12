@@ -24,13 +24,13 @@ import {
 } from "./styled";
 import { Link } from "react-router-dom";
 import Search from "../Search/Search";
-import { AppContext } from "../../App";
 import Cart from "../Cart/Cart";
 import { ToastContainer } from "react-toastify";
+import { AppContext } from "../../context/AppProvider";
 
 const Header = () => {
-  const { cart } = useContext(AppContext);
-  const { querySearch, setQuerySearch } = useContext(AppContext);
+  const { cart, querySearch, setQuerySearch } = useContext(AppContext);
+  const {} = useContext(AppContext);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [isShowCart, setIsShowCart] = useState(false);
   const [isShowSearch, setIsShowSearch] = useState(false);

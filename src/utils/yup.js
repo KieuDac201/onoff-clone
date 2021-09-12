@@ -24,9 +24,5 @@ export const schemaLogin = yup.object().shape({
     .required("Vui lòng nhập dữ liệu"),
 });
 export const schemaEdit = yup.object().shape({
-  email: yup
-    .string()
-    .email("Email không hợp lệ!")
-    .required("Vui lòng nhập dữ liệu"),
-  name: yup.string().required("Vui lòng nhập dữ liệu"),
+  name: yup.string(),
 });

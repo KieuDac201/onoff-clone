@@ -21,4 +21,8 @@ const UserInfoImgProfile = styled.img`
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid #999;
+  cursor: pointer;
+  &:hover {
+    border: 3px solid #999;
+  }
 `;

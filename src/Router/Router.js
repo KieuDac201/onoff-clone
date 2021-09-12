@@ -1,10 +1,14 @@
-import Home from "../pages/Home/Home";
-import Login from "../pages/Login/Login";
-import Register from "../pages/Register/Register";
-import Product from "../pages/Product/Product";
-import NotFound from "../pages/NotFound/NotFound";
-import ProductDetail from "../pages/ProductDetail/ProductDetail";
-import UserInfo from "../pages/UserInfo/UserInfo";
+import {
+  Home,
+  Login,
+  Product,
+  ProductDetail,
+  Register,
+  StoreSystem,
+  UserInfo,
+  NotFound,
+} from "../pages";
+import Checkout from "../pages/Checkout/Checkout";
 
 const ROUTES_MAIN = [
   { path: "/login", key: "login", exact: false, component: () => <Login /> },
@@ -49,6 +53,18 @@ const ROUTES_MAIN = [
     key: "user-info",
     exact: false,
     component: () => <UserInfo />,
+  },
+  {
+    path: "/store-system",
+    key: "store-system",
+    exact: false,
+    component: () => <StoreSystem />,
+  },
+  {
+    path: "/checkout",
+    key: "checkout",
+    exact: false,
+    component: () => <Checkout />,
   },
 
   { path: "/", key: "home", exact: true, component: () => <Home /> },

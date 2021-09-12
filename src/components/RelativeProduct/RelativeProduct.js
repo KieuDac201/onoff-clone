@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProductItem from "../ProductItem/ProductItem";
 import styled from "styled-components";
-import { AppContext } from "../../App";
 import { ProductList } from "../../pages/Home/SomeProduct/SomeProduct";
+import { AppContext } from "../../context/AppProvider";
 
 const RelativeProduct = ({ gender }) => {
   const { products } = useContext(AppContext);
