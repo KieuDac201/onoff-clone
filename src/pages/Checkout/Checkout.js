@@ -10,7 +10,6 @@ const Checkout = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const checkOut = () => {};
   return (
     <Wrapper>
       <Container>

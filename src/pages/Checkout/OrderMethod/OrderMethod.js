@@ -21,7 +21,6 @@ const OrderMethod = () => {
   }, [cart]);
 
   const handleCheckOut = () => {
-    console.log({ dac: totalPrice + deliveryCharge, addressClient });
     setCart([]);
     localStorage.removeItem("cart");
     showToast("thanh toán thành công", "success");

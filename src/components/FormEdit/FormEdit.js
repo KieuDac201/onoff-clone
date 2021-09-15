@@ -3,6 +3,7 @@ import { getAuth, updateProfile } from "firebase/auth";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FormError } from "../../pages/Login/styled";
+import showToast from "../../utils/showToast";
 import { schemaEdit } from "../../utils/yup";
 import {
   FormEditBtn,
@@ -29,6 +30,7 @@ const FormEdit = ({ name, setIsLoad, isLoad, setIsShowFormEdit }) => {
       displayName: data.name,
     })
       .then(() => {
+        showToast("cập nhật thành công!", "success");
         setIsLoad(!isLoad);
       })
       .catch((error) => {

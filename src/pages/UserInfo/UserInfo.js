@@ -24,6 +24,7 @@ import {
   UserInfoTitle,
   Wrapper,
 } from "./styled";
+import UserImg from "./UserImg";
 
 const UserInfo = () => {
   const history = useHistory();
@@ -31,6 +32,7 @@ const UserInfo = () => {
   const [user, setUser] = useState(null);
   const [isLoad, setIsLoad] = useState(false);
   const [isShowFormEdit, setIsShowFormEdit] = useState(false);
+  const [isImgUpload, setIsImgUpload] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -45,7 +47,7 @@ const UserInfo = () => {
         history.replace("/login");
       }
     });
-  }, [isLoad]);
+  }, [isLoad, isImgUpload]);
 
   const handleLogOut = () => {
     getAuth();
@@ -58,25 +60,6 @@ const UserInfo = () => {
       });
   };
 
-  const handleOnchange = (e) => {
-    console.log(e.target.files[0]);
-  };
-
-  const handleClick = () => {
-    // Create a root reference
-    const storage = getStorage();
-
-    // Create a reference to 'mountains.jpg'
-    const mountainsRef = ref(storage, "mountains.jpg");
-
-    // Create a reference to 'images/mountains.jpg'
-    const mountainImagesRef = ref(storage, "images/mountains.jpg");
-
-    // While the file names are the same, the references point to different files
-    // mountainsRef.name === mountainImagesRef.name; // true
-    // mountainsRef.fullPath === mountainImagesRef.fullPath;
-  };
-
   return (
     <Wrapper>
       <Container>
@@ -86,9 +69,7 @@ const UserInfo = () => {
             <UserInfoSelect onClick={handleLogOut}>Đăng xuất</UserInfoSelect>
           </UserInfoLeft>
           <UserInfoRight>
-            <UserInfoTitle onClick={handleClick}>
-              TÀI KHOẢN CỦA TÔI
-            </UserInfoTitle>
+            <UserInfoTitle>TÀI KHOẢN CỦA TÔI</UserInfoTitle>
             <UserInfoSubTitle>Thông tin tài khoản</UserInfoSubTitle>
             <UserInfoList>
               <UserInfoItem>
@@ -109,11 +90,11 @@ const UserInfo = () => {
                 </UserInfoBtns>
               </UserInfoItem>
               <UserInfoItem>
-                <h4>Ảnh đại diện</h4>
-                <label htmlFor="file">
-                  <UserImgProfile photoUrl={user?.photoUrl} />
-                </label>
-                <input type="file" id="file" hidden onChange={handleOnchange} />
+                <UserImg
+                  user={user}
+                  setIsImgUpload={setIsImgUpload}
+                  isImgUpload={isImgUpload}
+                />
               </UserInfoItem>
               <UserInfoItem>
                 {isShowFormEdit && (
