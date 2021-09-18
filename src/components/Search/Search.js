@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { AppContext } from "../../context/AppProvider";
 
 const Search = ({ isShowSearch, setIsShowSearch }) => {
-  const { querySearch, setQuerySearch } = useContext(AppContext);
+  const { setQuerySearch } = useContext(AppContext);
   const [searchValue, setSearchValue] = useState("");
   let history = useHistory();
 

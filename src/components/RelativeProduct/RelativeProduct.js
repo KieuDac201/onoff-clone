@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import ProductItem from "../ProductItem/ProductItem";
-import styled from "styled-components";
-import { ProductList } from "../../pages/Home/SomeProduct/SomeProduct";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
 import { getAllProduct } from "../../features/products/productSlice";
+import { ProductList } from "../../pages/Home/SomeProduct/SomeProduct";
+import ProductItem from "../../pages/Product/ProductItem/ProductItem";
 
 const RelativeProduct = ({ gender }) => {
   const [relativeProducts, setRelativeProducts] = useState([]);
@@ -14,7 +14,7 @@ const RelativeProduct = ({ gender }) => {
       (product) => product.gender?.toLowerCase() === gender?.toLowerCase()
     );
     setRelativeProducts(arrFiltered);
-  }, [gender]);
+  }, [gender, products]);
   return (
     <Wrapper>
       <RelativeProductTitle>SẢN PHẨM LIÊN QUAN</RelativeProductTitle>
@@ -26,7 +26,6 @@ const RelativeProduct = ({ gender }) => {
             price={product.price}
             images={product.images}
             id={product.id}
-            key={product.id}
           />
         ))}
       </ProductList>

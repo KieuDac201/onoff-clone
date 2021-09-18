@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { set, useForm } from "react-hook-form";
 import { AppContext } from "../../../context/AppProvider";
 
 const apiVietNam = "https://provinces.open-api.vn/api/?depth=3";
 
 const OrderAdress = () => {
   const [addressVn, setAddressVn] = useState([]);
-  const [wards, setWards] = useState([]);
+  // const [wards, setWards] = useState([]);
   const { addressClient, setAddressClient } = useContext(AppContext);
 
   useEffect(() => {

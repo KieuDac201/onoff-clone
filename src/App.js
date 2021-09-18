@@ -48,7 +48,7 @@ function App() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [dispatch]);
   return <AppProvider>{!loading && <MainLayout />}</AppProvider>;
 }
 

@@ -15,7 +15,6 @@ const OrderInfo = () => {
               img={item.images[0]}
               price={item.price}
               quantity={item.quantity}
-              price={item.price}
               name={item.name}
             />
           ))}

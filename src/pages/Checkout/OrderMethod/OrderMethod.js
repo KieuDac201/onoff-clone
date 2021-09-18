@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { AppContext } from "../../../context/AppProvider";
+import { clearCart, getAllCart } from "../../../features/cart/cartSlice";
 import formatPrice from "../../../utils/formatPrice";
 import showToast from "../../../utils/showToast";
 
 const OrderMethod = () => {
-  const { cart, addressClient, setCart } = useContext(AppContext);
+  const cart = useSelector(getAllCart);
+  const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
   const [deliveryCharge, setDeliveryCharge] = useState(15000);
 
@@ -21,7 +24,7 @@ const OrderMethod = () => {
   }, [cart]);
 
   const handleCheckOut = () => {
-    setCart([]);
+    dispatch(clearCart());
     localStorage.removeItem("cart");
     showToast("thanh toán thành công", "success");
   };

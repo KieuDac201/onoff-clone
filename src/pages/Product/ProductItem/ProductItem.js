@@ -1,10 +1,9 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
-import discountImg from "../../assets/images/discount-10.png";
-import formatPrice from "../../utils/formatPrice";
-import loadImg from "../../assets/images/loading.png";
 import "react-lazy-load-image-component/src/effects/opacity.css";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import discountImg from "../../../assets/images/discount-10.png";
+import formatPrice from "../../../utils/formatPrice";
 import {
   DiscountImg,
   NewPrice,

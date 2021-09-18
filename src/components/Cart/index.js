@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GrFormClose } from "react-icons/gr";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { AppContext } from "../../context/AppProvider";
 import { getAllCart } from "../../features/cart/cartSlice";
 import formatPrice from "../../utils/formatPrice";
 import CartItem from "./CartItem/CartItem";

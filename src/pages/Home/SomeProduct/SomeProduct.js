@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Container from "../../../components/Container";
-import ProductItem from "../../../components/ProductItem/ProductItem";
+import ProductItem from "../../Product/ProductItem/ProductItem";
 import Title from "../../../components/Title/Title";
 import { getAllProduct } from "../../../features/products/productSlice";
 

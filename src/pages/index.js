@@ -5,4 +5,4 @@ export { default as Product } from "./Product";
 export { default as NotFound } from "./NotFound/NotFound";
 export { default as ProductDetail } from "./ProductDetail";
 export { default as UserInfo } from "./UserInfo/UserInfo";
-export { default as StoreSystem } from "./StoreSystem/StoreSystem";
+export { default as StoreSystem } from "./Home/StoreSystem/StoreSystem";

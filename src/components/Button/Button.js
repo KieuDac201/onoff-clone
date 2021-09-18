@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 const Button = ({ text, large, fill }) => {
   return (
@@ -11,10 +10,6 @@ const Button = ({ text, large, fill }) => {
 };
 
 export default Button;
-
-Button.defaultProps = {
-  text: "Button",
-};
 
 const Btn = styled.div`
   user-select: none;

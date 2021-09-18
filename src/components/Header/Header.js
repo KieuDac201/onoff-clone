@@ -1,11 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { BsSearch, BsChevronLeft } from "react-icons/bs";
-import { FaUserAlt, FaHome, FaSearch } from "react-icons/fa";
+import { BsChevronLeft } from "react-icons/bs";
+import { FaHome, FaSearch, FaUserAlt } from "react-icons/fa";
+import { FiMenu } from "react-icons/fi";
 import { GiShoppingBag } from "react-icons/gi";
 import { MdLocationOn } from "react-icons/md";
-import { FiMenu } from "react-icons/fi";
-import Container from "../Container";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import logoImg from "../../assets/images/logo.svg";
+import { AppContext } from "../../context/AppProvider";
+import { getAllCart } from "../../features/cart/cartSlice";
+import Cart from "../Cart";
+import Container from "../Container";
+import Search from "../Search/Search";
 import {
   BarIcon,
   CartIcon,
@@ -22,13 +29,6 @@ import {
   SearchIcon,
   UserIcon,
 } from "./styled";
-import { Link } from "react-router-dom";
-import Search from "../Search/Search";
-import Cart from "../Cart";
-import { ToastContainer } from "react-toastify";
-import { AppContext } from "../../context/AppProvider";
-import { useSelector } from "react-redux";
-import { getAllCart } from "../../features/cart/cartSlice";
 
 const Header = () => {
   const { setQuerySearch } = useContext(AppContext);

@@ -1,8 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
+import { BiMinus, BiPlus } from "react-icons/bi";
+import { FaTrashAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import {
+  decreProductQuan,
+  delProduct,
+  increProductQuan,
+} from "../../../features/cart/cartSlice";
+import formatPrice from "../../../utils/formatPrice";
 import {
   CartBtnDel,
   CartContent,
   CartImg,
+  CartItem1,
   CartItemName,
   CartItemNewPrice,
   CartItemOldPrice,
@@ -10,22 +20,9 @@ import {
   CartQuantity,
   CartQuantityBtn,
   CartQuantityBtns,
-  CartItem1,
 } from "../styled";
-import { BiMinus, BiPlus } from "react-icons/bi";
-import { FaTrashAlt } from "react-icons/fa";
-import formatPrice from "../../../utils/formatPrice";
-import { AppContext } from "../../../context/AppProvider";
-import { useDispatch } from "react-redux";
-import {
-  decreProductQuan,
-  delProduct,
-  increProductQuan,
-} from "../../../features/cart/cartSlice";
 
 const CartItem = ({ img, name, quantity, price, id }) => {
-  const { cart, setCart } = useContext(AppContext);
-
   const dispatch = useDispatch();
   const delFromCart = (id) => {
     dispatch(delProduct(id));

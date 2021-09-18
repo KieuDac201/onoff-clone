@@ -2,9 +2,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { getAuth, updateProfile } from "firebase/auth";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { FormError } from "../../pages/Login/styled";
-import showToast from "../../utils/showToast";
-import { schemaEdit } from "../../utils/yup";
+import { FormError } from "../../../pages/Login/styled";
+import showToast from "../../../utils/showToast";
+import { schemaEdit } from "../../../utils/yup";
 import {
   FormEditBtn,
   FormEditInput,

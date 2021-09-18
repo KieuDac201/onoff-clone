@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Breadcrum, BreadcrumItem } from "../../components/Breadcrum/Breadcrum";
 import Container from "../../components/Container";
 import Loading from "../../components/Loading/Loading";
-import ProductItem from "../../components/ProductItem/ProductItem";
+import ProductItem from "./ProductItem/ProductItem";
 import { AppContext } from "../../context/AppProvider";
 import { getAllProduct } from "../../features/products/productSlice";
 import filterProductGender from "../../utils/filterProductGender";
