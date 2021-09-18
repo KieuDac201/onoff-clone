@@ -33,10 +33,9 @@ const ProductItem = ({ images, name, price, id }) => {
         <ProductImg
           src={img}
           alt={name}
-          effect="opacity"
           onMouseOver={handleHover}
           onMouseLeave={handleLeave}
-          placeholderSrc={loadImg}
+          loading="lazy"
         />
       </Link>
       <ProductName>{name}</ProductName>

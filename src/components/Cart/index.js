@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { GrFormClose } from "react-icons/gr";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../context/AppProvider";
+import { getAllCart } from "../../features/cart/cartSlice";
 import formatPrice from "../../utils/formatPrice";
-import CartItem from "../CartItem/CartItem";
+import CartItem from "./CartItem/CartItem";
 import {
   CartBtnClose,
   CartButton,
@@ -16,8 +18,8 @@ import {
 } from "./styled";
 
 const Cart = ({ setIsShowCart, isShowCart }) => {
-  const { cart } = useContext(AppContext);
   const [totalPriceCart, setTotalPriceCart] = useState(0);
+  const cart = useSelector(getAllCart);
 
   useEffect(() => {
     let totalPrice = 0;

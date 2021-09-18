@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export const DiscountImg = styled.img`
   position: absolute;
@@ -14,7 +13,7 @@ export const ProductItems = styled.div`
   :hover {
   }
 `;
-export const ProductImg = styled(LazyLoadImage)`
+export const ProductImg = styled.img`
   width: 100%;
   margin-bottom: 12px;
 `;

@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import ProductItem from "../ProductItem/ProductItem";
 import styled from "styled-components";
 import { ProductList } from "../../pages/Home/SomeProduct/SomeProduct";
-import { AppContext } from "../../context/AppProvider";
+import { useSelector } from "react-redux";
+import { getAllProduct } from "../../features/products/productSlice";
 
 const RelativeProduct = ({ gender }) => {
-  const { products } = useContext(AppContext);
   const [relativeProducts, setRelativeProducts] = useState([]);
+  const products = useSelector(getAllProduct);
 
   useEffect(() => {
     let arrFiltered = products.filter(

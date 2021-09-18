@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { useLocation, useRouteMatch } from "react-router";
 import { Link } from "react-router-dom";
 import { Breadcrum, BreadcrumItem } from "../../components/Breadcrum/Breadcrum";
@@ -7,6 +8,7 @@ import Container from "../../components/Container";
 import Loading from "../../components/Loading/Loading";
 import ProductItem from "../../components/ProductItem/ProductItem";
 import { AppContext } from "../../context/AppProvider";
+import { getAllProduct } from "../../features/products/productSlice";
 import filterProductGender from "../../utils/filterProductGender";
 import filterProductSearch from "../../utils/filterProductSearch";
 import filterProductType from "../../utils/filterProductType";
@@ -27,8 +29,8 @@ const Products = () => {
   const { path } = useRouteMatch();
   const { pathname } = useLocation();
   const [loading, setLoading] = useState(false);
-  const { products, querySearch, setQuerySearch } =
-    React.useContext(AppContext);
+  const { querySearch, setQuerySearch } = React.useContext(AppContext);
+  const products = useSelector(getAllProduct);
   const [productRender, setProductRender] = useState([]);
   const [productGender, setProductGender] = useState("");
   const [productSort, setProductSort] = useState("");

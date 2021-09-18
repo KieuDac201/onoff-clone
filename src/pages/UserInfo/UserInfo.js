@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import Container from "../../components/Container";
 import FormEdit from "../../components/FormEdit/FormEdit";
-import UserImgProfile from "../../components/UserImgProfile/UserImgProfile";
+import UserImgProfile from "./UserImgProfile/UserImgProfile";
 import showToast from "../../utils/showToast";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 

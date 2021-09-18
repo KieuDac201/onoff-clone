@@ -14,24 +14,29 @@ import {
   ProductNewPrice,
   ProductOldPrice,
 } from "./styled";
-import ProductImageGallery from "../../components/ProductImageGallery/ProductImageGallery";
+import ProductImageGallery from "./ProductImageGallery/ProductImageGallery";
 import { useParams } from "react-router";
 import formatPrice from "../../utils/formatPrice";
 import { Link } from "react-router-dom";
-import ProductSizeCo from "../../components/ProductSize/ProductSize";
-import ProductService from "../../components/ProductService/ProductService";
-import ProductQuantity from "../../components/ProductQuantity/ProductQuantity";
-import ProductInfo from "../../components/ProductInfo/ProductInfo";
+import ProductSizeCo from "./ProductSize/ProductSize";
+import ProductService from "./ProductService/ProductService";
+import ProductQuantity from "./ProductQuantity/ProductQuantity";
+import ProductInfo from "./ProductInfo/ProductInfo";
 import RelativeProduct from "../../components/RelativeProduct/RelativeProduct";
 import { AppContext } from "../../context/AppProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProduct } from "../../features/products/productSlice";
+import { addToCart } from "../../features/cart/cartSlice";
 
 const ProductDetail = () => {
-  const { products, setCart, cart } = useContext(AppContext);
+  const { setCart, cart } = useContext(AppContext);
+  const products = useSelector(getAllProduct);
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [images, setImages] = useState([]);
   const [productSize, setProductSize] = useState("");
   const [productQuantity, setProductQuantity] = useState(1);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,21 +49,8 @@ const ProductDetail = () => {
     setProduct(productSelected);
   }, [id, products]);
 
-  const addToCart = (productAdd) => {
-    const arr = cart.some((item) => item.id === productAdd.id);
-    if (arr) {
-      const arrSelect = cart.map((item) =>
-        item.id === productAdd.id
-          ? { ...item, quantity: item.quantity + productQuantity }
-          : item
-      );
-      localStorage.setItem("cart", JSON.stringify(arrSelect));
-      setCart(arrSelect);
-    } else {
-      let addItem = [...cart, { ...productAdd, quantity: productQuantity }];
-      localStorage.setItem("cart", JSON.stringify(addItem));
-      setCart(addItem);
-    }
+  const handleAddToCart = (productAdd) => {
+    dispatch(addToCart({ product: productAdd, quantity: productQuantity }));
   };
 
   return (
@@ -101,7 +93,7 @@ const ProductDetail = () => {
               />
               <ProductService />
 
-              <ProductBtn onClick={() => addToCart(product)}>
+              <ProductBtn onClick={() => handleAddToCart(product)}>
                 Thêm vào giỏ hàng
               </ProductBtn>
 

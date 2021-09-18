@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductImg } from "../../pages/ProductDetail/styled";
+import { ProductImg } from "../styled";
 import ImageGallery from "react-image-gallery";
 
 const ProductImageGallery = ({ images }) => {

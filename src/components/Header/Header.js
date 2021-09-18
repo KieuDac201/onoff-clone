@@ -24,17 +24,19 @@ import {
 } from "./styled";
 import { Link } from "react-router-dom";
 import Search from "../Search/Search";
-import Cart from "../Cart/Cart";
+import Cart from "../Cart";
 import { ToastContainer } from "react-toastify";
 import { AppContext } from "../../context/AppProvider";
+import { useSelector } from "react-redux";
+import { getAllCart } from "../../features/cart/cartSlice";
 
 const Header = () => {
-  const { cart, querySearch, setQuerySearch } = useContext(AppContext);
-  const {} = useContext(AppContext);
+  const { setQuerySearch } = useContext(AppContext);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [isShowCart, setIsShowCart] = useState(false);
   const [isShowSearch, setIsShowSearch] = useState(false);
   const [countProductCart, setCountProductCart] = useState(0);
+  const cart = useSelector(getAllCart);
 
   const toggleShowMenu = () => {
     setIsShowMenu(!isShowMenu);
