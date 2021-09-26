@@ -4,22 +4,25 @@ import Title from "../../components/Title/Title";
 import styled from "styled-components";
 import notFoundImg from "../../assets/images/404.jpg";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const NotFound = () => {
   return (
-    <Wrapper>
-      <Container>
-        <Title>TRANG BẠN YÊU CẦU KHÔNG CÓ TRÊN WEBSITE ONOFF</Title>
-        <Breadcrumb>
-          <BreadcrumbItem>
-            {" "}
-            <Link to="/">TRANG CHỦ</Link>
-          </BreadcrumbItem>
-          <BreadcrumbItem> 404 PAGE NOT FOUND</BreadcrumbItem>
-        </Breadcrumb>
-        <NotFoundImg src={notFoundImg} />
-      </Container>
-    </Wrapper>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <Wrapper>
+        <Container>
+          <Title>TRANG BẠN YÊU CẦU KHÔNG CÓ TRÊN WEBSITE ONOFF</Title>
+          <Breadcrumb>
+            <BreadcrumbItem>
+              {" "}
+              <Link to="/">TRANG CHỦ</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem> 404 PAGE NOT FOUND</BreadcrumbItem>
+          </Breadcrumb>
+          <NotFoundImg src={notFoundImg} />
+        </Container>
+      </Wrapper>
+    </motion.div>
   );
 };
 

@@ -34,7 +34,6 @@ const ProductItem = ({ images, name, price, id }) => {
           alt={name}
           onMouseOver={handleHover}
           onMouseLeave={handleLeave}
-          loading="lazy"
         />
       </Link>
       <ProductName>{name}</ProductName>

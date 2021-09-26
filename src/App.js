@@ -12,6 +12,12 @@ import {
   getLoadingState,
 } from "./features/products/productSlice";
 import ROUTES_MAIN from "./Router/Router";
+import { motion } from "framer-motion";
+
+const variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
 
 function MainLayout() {
   return (

@@ -28,6 +28,7 @@ import {
   Wrapper,
 } from "./styled";
 import showToast from "../../utils/showToast";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const history = useHistory();
@@ -76,54 +77,59 @@ const Login = () => {
       });
   };
   return (
-    <Wrapper>
-      <Container>
-        <LoginMain>
-          <LoginLeft>
-            <LoginTitle>TÀI KHOẢN</LoginTitle>
-            <LoginClientState>Khách hàng đã đăng ký tài khoản</LoginClientState>
-            <LoginText>
-              Bạn đã có tài khoản, xin mời đăng nhập bằng địa chỉ email đăng ký.
-            </LoginText>
-            <LoginForm onSubmit={handleSubmit(onSubmit)}>
-              <FormGroup>
-                <FormLabel>
-                  Email <span>*</span>
-                </FormLabel>
-                <FormInput {...register("email")} type="email" />
-              </FormGroup>
-              <FormError>{errors.email?.message}</FormError>
-              <FormError>
-                {errorIncorect.isInCorect ? errorIncorect.message : ""}
-              </FormError>
-              <FormGroup>
-                <FormLabel>
-                  Mật khẩu <span>*</span>
-                </FormLabel>
-                <FormInput {...register("password")} type="password" />
-              </FormGroup>
-              <FormError>{errors.password?.message}</FormError>
-              <FormButtons>
-                <button type="submit">
-                  {isLoading ? (
-                    <PulseLoader color="#ffffff" loading={true} size={15} />
-                  ) : (
-                    "Đăng nhập"
-                  )}
-                </button>
-                <FormButtonForgot>Quên mật khẩu</FormButtonForgot>
-              </FormButtons>
-            </LoginForm>
-          </LoginLeft>
-          <LoginRight>
-            <LoginClientState>Khách hàng mới</LoginClientState>
-            <Link to="/register">
-              <Button fill="true" text="Đăng ký" />
-            </Link>
-          </LoginRight>
-        </LoginMain>
-      </Container>
-    </Wrapper>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <Wrapper>
+        <Container>
+          <LoginMain>
+            <LoginLeft>
+              <LoginTitle>TÀI KHOẢN</LoginTitle>
+              <LoginClientState>
+                Khách hàng đã đăng ký tài khoản
+              </LoginClientState>
+              <LoginText>
+                Bạn đã có tài khoản, xin mời đăng nhập bằng địa chỉ email đăng
+                ký.
+              </LoginText>
+              <LoginForm onSubmit={handleSubmit(onSubmit)}>
+                <FormGroup>
+                  <FormLabel>
+                    Email <span>*</span>
+                  </FormLabel>
+                  <FormInput {...register("email")} type="email" />
+                </FormGroup>
+                <FormError>{errors.email?.message}</FormError>
+                <FormError>
+                  {errorIncorect.isInCorect ? errorIncorect.message : ""}
+                </FormError>
+                <FormGroup>
+                  <FormLabel>
+                    Mật khẩu <span>*</span>
+                  </FormLabel>
+                  <FormInput {...register("password")} type="password" />
+                </FormGroup>
+                <FormError>{errors.password?.message}</FormError>
+                <FormButtons>
+                  <button type="submit">
+                    {isLoading ? (
+                      <PulseLoader color="#ffffff" loading={true} size={15} />
+                    ) : (
+                      "Đăng nhập"
+                    )}
+                  </button>
+                  <FormButtonForgot>Quên mật khẩu</FormButtonForgot>
+                </FormButtons>
+              </LoginForm>
+            </LoginLeft>
+            <LoginRight>
+              <LoginClientState>Khách hàng mới</LoginClientState>
+              <Link to="/register">
+                <Button fill="true" text="Đăng ký" />
+              </Link>
+            </LoginRight>
+          </LoginMain>
+        </Container>
+      </Wrapper>
+    </motion.div>
   );
 };
 

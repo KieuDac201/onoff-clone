@@ -24,6 +24,7 @@ import {
   TitleTop,
   Wrapper,
 } from "./styled";
+import { motion } from "framer-motion";
 
 const Products = () => {
   const { path } = useRouteMatch();
@@ -108,7 +109,7 @@ const Products = () => {
   }, [pathname, filterList, productSort]);
 
   return (
-    <>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Wrapper>
         <Container>
           <Breadcrum>
@@ -157,7 +158,7 @@ const Products = () => {
           /> */}
         </Container>
       </Wrapper>
-    </>
+    </motion.div>
   );
 };
 

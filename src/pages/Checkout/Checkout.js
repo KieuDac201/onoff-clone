@@ -4,6 +4,7 @@ import styled from "styled-components";
 import OrderInfo from "./OrderInfo/OrderInfo";
 import OrderAddress from "./OrderAddress/OrderAddress";
 import OrderMethod from "./OrderMethod/OrderMethod";
+import { motion } from "framer-motion";
 
 const Checkout = () => {
   useEffect(() => {
@@ -11,25 +12,27 @@ const Checkout = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <Container>
-        <CheckoutTitle>ĐẶT HÀNG VÀ THANH TOÁN</CheckoutTitle>
-        <CheckoutMain>
-          <OrderCol>
-            <OrderTitle>THÔNG TIN ĐƠN HÀNG</OrderTitle>
-            <OrderInfo />
-          </OrderCol>
-          <OrderCol>
-            <OrderTitle>ĐỊA CHỈ NHẬN HÀNG</OrderTitle>
-            <OrderAddress />
-          </OrderCol>
-          <OrderCol>
-            <OrderTitle> THANH TOÁN</OrderTitle>
-            <OrderMethod />
-          </OrderCol>
-        </CheckoutMain>
-      </Container>
-    </Wrapper>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <Wrapper>
+        <Container>
+          <CheckoutTitle>ĐẶT HÀNG VÀ THANH TOÁN</CheckoutTitle>
+          <CheckoutMain>
+            <OrderCol>
+              <OrderTitle>THÔNG TIN ĐƠN HÀNG</OrderTitle>
+              <OrderInfo />
+            </OrderCol>
+            <OrderCol>
+              <OrderTitle>ĐỊA CHỈ NHẬN HÀNG</OrderTitle>
+              <OrderAddress />
+            </OrderCol>
+            <OrderCol>
+              <OrderTitle> THANH TOÁN</OrderTitle>
+              <OrderMethod />
+            </OrderCol>
+          </CheckoutMain>
+        </Container>
+      </Wrapper>
+    </motion.div>
   );
 };
 

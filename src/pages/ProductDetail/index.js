@@ -27,6 +27,7 @@ import { AppContext } from "../../context/AppProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct } from "../../features/products/productSlice";
 import { addToCart } from "../../features/cart/cartSlice";
+import { motion } from "framer-motion";
 
 const ProductDetail = () => {
   const { setCart, cart } = useContext(AppContext);
@@ -54,56 +55,62 @@ const ProductDetail = () => {
   };
 
   return (
-    <Wrapper>
-      {product && (
-        <Container>
-          <Breadcrum>
-            <Link to="/">
-              <BreadcrumItem>Trang chủ</BreadcrumItem>
-            </Link>
-            <Link
-              to={
-                product.gender?.toLowerCase() === "nam" ? "/do-nam" : "/do-nu"
-              }
-            >
-              <BreadcrumItem>Sản phẩm {product.gender}</BreadcrumItem>
-            </Link>
-            <BreadcrumItem last>{product.name}</BreadcrumItem>
-          </Breadcrum>
-          <MainProductDetail>
-            <ProductImageGallery images={images} />
-            <ProductContent>
-              <ProductName>{product.name}</ProductName>
-              <ProductNum>
-                <ProductCode>SKU#: {id}</ProductCode>
-                <ProductSold>Đã bán {product.sold}</ProductSold>
-              </ProductNum>
-              <ProductPrice>
-                <ProductNewPrice>{formatPrice(product.price)}</ProductNewPrice>
-                <ProductOldPrice>{formatPrice(product.price)}</ProductOldPrice>
-              </ProductPrice>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <Wrapper>
+        {product && (
+          <Container>
+            <Breadcrum>
+              <Link to="/">
+                <BreadcrumItem>Trang chủ</BreadcrumItem>
+              </Link>
+              <Link
+                to={
+                  product.gender?.toLowerCase() === "nam" ? "/do-nam" : "/do-nu"
+                }
+              >
+                <BreadcrumItem>Sản phẩm {product.gender}</BreadcrumItem>
+              </Link>
+              <BreadcrumItem last>{product.name}</BreadcrumItem>
+            </Breadcrum>
+            <MainProductDetail>
+              <ProductImageGallery images={images} />
+              <ProductContent>
+                <ProductName>{product.name}</ProductName>
+                <ProductNum>
+                  <ProductCode>SKU#: {id}</ProductCode>
+                  <ProductSold>Đã bán {product.sold}</ProductSold>
+                </ProductNum>
+                <ProductPrice>
+                  <ProductNewPrice>
+                    {formatPrice(product.price)}
+                  </ProductNewPrice>
+                  <ProductOldPrice>
+                    {formatPrice(product.price)}
+                  </ProductOldPrice>
+                </ProductPrice>
 
-              <ProductSizeCo
-                setProductSize={setProductSize}
-                productSize={productSize}
-              />
-              <ProductQuantity
-                productQuantity={productQuantity}
-                setProductQuantity={setProductQuantity}
-              />
-              <ProductService />
+                <ProductSizeCo
+                  setProductSize={setProductSize}
+                  productSize={productSize}
+                />
+                <ProductQuantity
+                  productQuantity={productQuantity}
+                  setProductQuantity={setProductQuantity}
+                />
+                <ProductService />
 
-              <ProductBtn onClick={() => handleAddToCart(product)}>
-                Thêm vào giỏ hàng
-              </ProductBtn>
+                <ProductBtn onClick={() => handleAddToCart(product)}>
+                  Thêm vào giỏ hàng
+                </ProductBtn>
 
-              <ProductInfo />
-            </ProductContent>
-          </MainProductDetail>
-          <RelativeProduct gender={product.gender} />
-        </Container>
-      )}
-    </Wrapper>
+                <ProductInfo />
+              </ProductContent>
+            </MainProductDetail>
+            <RelativeProduct gender={product.gender} />
+          </Container>
+        )}
+      </Wrapper>
+    </motion.div>
   );
 };
 
